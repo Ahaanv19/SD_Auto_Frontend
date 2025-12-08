@@ -1,9 +1,9 @@
 
 <section class="max-w-5xl mx-auto px-6 py-12 prose prose-lg dark:prose-invert">
-  <h1>About SD Auto</h1>
+  <h1>About SD/Poway Auto </h1>
 
   <p>
-    <strong>SD Auto</strong> is a full-stack intelligent routing platform designed to enhance daily commutes
+    <strong>SD/Poway Auto</strong> is a full-stack intelligent routing platform designed to enhance daily commutes
     in San Diego, California through real-time data, community reporting, and AI-driven route optimization.
     Our goal is to make transportation more efficient, reliable, and adaptive.
   </p>
