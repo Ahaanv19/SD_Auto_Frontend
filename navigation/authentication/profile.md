@@ -246,7 +246,7 @@ window.changeUid = async function(uid) {
                alert("You updated your Github ID, so you will automatically be logged out. Be sure to remember your new github id to log in!");
                console.log('UID updated successfully!');
                window.updateUidField(uid);
-               window.location.href = '/portfolio_2025/login'
+               window.location.href = '{{site.baseurl}}/login'
            }
        };
 
@@ -269,7 +269,7 @@ window.changePassword = async function(password) {
            message: 'password-message', // Adjust the message area as needed
            callback: () => {
                console.log('Password updated successfully!');
-               window.location.href = '/portfolio_2025/login'
+               window.location.href = '{{site.baseurl}}/login'
 
            }
        };

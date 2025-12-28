@@ -647,7 +647,10 @@ nav: true
       <option value="transit">🚌 Transit</option>
     </select>
   </div>
-  <button id="fetch_routes_btn" type="button">Find Best Route →</button>
+  <div class="flex items-center justify-between gap-4">
+    <button id="fetch_routes_btn" type="button">Find Best Route →</button>
+    <div id="route-usage-display" class="hidden text-sm font-medium px-3 py-1 bg-gray-800/50 rounded-lg"></div>
+  </div>
 </div>
 
 <div id="map"></div>
