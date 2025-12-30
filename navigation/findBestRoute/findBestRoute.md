@@ -14,6 +14,317 @@ nav: true
 /* This file was previously corrupted (duplicated tokens / broken front matter). */
 /* Only keep page-scoped styles here; avoid <head>/<body> tags inside Markdown pages. */
 
+/* ===== REAL-TIME NAVIGATION STYLES ===== */
+.nav-controls-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 20px 0;
+  flex-wrap: wrap;
+}
+
+.nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  border: none;
+  border-radius: 14px;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.nav-btn.start-btn {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+}
+
+.nav-btn.start-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.5);
+}
+
+.nav-btn.stop-btn {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
+}
+
+.nav-btn.stop-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(239, 68, 68, 0.5);
+}
+
+.nav-btn.hidden {
+  display: none;
+}
+
+.voice-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 16px;
+  background: #1e293b;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 13px;
+  color: #94a3b8;
+  transition: all 0.2s;
+}
+
+.voice-toggle:hover {
+  background: #334155;
+}
+
+.voice-toggle input {
+  cursor: pointer;
+}
+
+.voice-toggle input:checked + span {
+  color: #0066cc;
+}
+
+/* Navigation status bar */
+.nav-status-bar {
+  display: none;
+  background: linear-gradient(135deg, #0066cc 0%, #004d99 100%);
+  border-radius: 16px;
+  padding: 16px 20px;
+  margin-top: 16px;
+  color: white;
+}
+
+.nav-status-bar.active {
+  display: block;
+  animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.nav-status-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.nav-current-step {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.nav-current-step .step-number {
+  font-size: 12px;
+  opacity: 0.8;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.nav-current-step .step-instruction {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.nav-distance {
+  font-size: 14px;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 8px 14px;
+  border-radius: 8px;
+}
+
+/* Direction steps styling */
+.directions-list {
+  list-style: none;
+  padding: 0;
+  margin: 16px 0;
+  max-height: 400px;
+  overflow-y: auto;
+  border-radius: 16px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+}
+
+.dark .directions-list {
+  background: #1e293b;
+  border-color: #334155;
+}
+
+.direction-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 14px 18px;
+  border-bottom: 1px solid #e2e8f0;
+  transition: all 0.3s ease;
+}
+
+.dark .direction-step {
+  border-color: #334155;
+}
+
+.direction-step:last-child {
+  border-bottom: none;
+}
+
+.step-indicator {
+  flex-shrink: 0;
+}
+
+.step-number-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  background: #e2e8f0;
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 700;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.dark .step-number-badge {
+  background: #334155;
+  color: #94a3b8;
+}
+
+.step-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.step-content .step-instruction {
+  font-size: 14px;
+  color: #1e293b;
+  font-weight: 500;
+}
+
+.dark .step-content .step-instruction {
+  color: #f1f5f9;
+}
+
+.step-meta {
+  font-size: 12px;
+  color: #64748b;
+}
+
+/* Step states */
+.direction-step.step-completed {
+  background: rgba(16, 185, 129, 0.08);
+}
+
+.direction-step.step-completed .step-number-badge {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+}
+
+.direction-step.step-completed .step-content .step-instruction {
+  color: #059669;
+  text-decoration: line-through;
+  opacity: 0.7;
+}
+
+.dark .direction-step.step-completed .step-content .step-instruction {
+  color: #34d399;
+}
+
+.direction-step.step-active {
+  background: linear-gradient(90deg, rgba(0, 102, 204, 0.15) 0%, rgba(0, 102, 204, 0.05) 100%);
+  border-left: 4px solid #0066cc;
+  padding-left: 14px;
+}
+
+.direction-step.step-active .step-number-badge {
+  background: linear-gradient(135deg, #0066cc 0%, #06b6d4 100%);
+  color: white;
+  animation: pulse-nav 2s infinite;
+}
+
+@keyframes pulse-nav {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(0, 102, 204, 0.4); }
+  50% { box-shadow: 0 0 0 8px rgba(0, 102, 204, 0); }
+}
+
+.direction-step.step-active .step-content .step-instruction {
+  color: #0066cc;
+  font-weight: 600;
+}
+
+.dark .direction-step.step-active .step-content .step-instruction {
+  color: #38bdf8;
+}
+
+.direction-step.step-upcoming {
+  opacity: 0.7;
+}
+
+/* Route header styling */
+.route-header {
+  margin: 20px 0 8px;
+}
+
+.route-title {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 16px;
+  margin: 0;
+}
+
+.route-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 12px;
+  background: linear-gradient(135deg, #0066cc 0%, #06b6d4 100%);
+  color: white;
+  font-size: 12px;
+  font-weight: 700;
+  border-radius: 20px;
+}
+
+.route-distance, .route-duration {
+  font-size: 14px;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.dark .route-distance, .dark .route-duration {
+  color: #94a3b8;
+}
+
+/* Mobile responsive */
+@media (max-width: 640px) {
+  .nav-controls-wrapper {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .nav-btn {
+    justify-content: center;
+  }
+  
+  .nav-status-content {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .directions-list {
+    max-height: 300px;
+  }
+}
+
 /* ===== LIVE DATA DASHBOARD STYLES ===== */
 .data-source-badge {
   display: inline-flex;

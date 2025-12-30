@@ -339,9 +339,10 @@ menu: nav/home.html
   
   window.confirmCancel = async function() {
     try {
-      const response = await fetch(`${pythonURI}/api/subscription/cancel`, {
+      const response = await fetch(`${pythonURI}/api/stripe/cancel`, {
         ...fetchOptions,
-        method: 'POST'
+        method: 'POST',
+        body: JSON.stringify({ immediate: false })  // Cancel at end of billing period
       });
       
       if (response.ok) {
