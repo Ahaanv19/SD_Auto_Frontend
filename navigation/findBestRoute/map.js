@@ -3,6 +3,7 @@ import polyline from 'https://cdn.skypack.dev/@mapbox/polyline';
 
 const apiUrl = `${pythonURI}/api/get_routes`;
 const routeUsageUrl = `${pythonURI}/api/subscription/route-usage`;
+const incidentsUrl = `${pythonURI}/api/incidents`;
 
 // Get the base URL from the page (set by Jekyll)
 function getBaseUrl() {
@@ -24,6 +25,213 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(map);
 
 let polylines = [];
+
+// =====================================================
+// HAZARD/INCIDENT MARKERS SYSTEM
+// =====================================================
+let incidentMarkers = [];
+let incidentsData = [];
+
+// Get marker icon based on incident type
+function getIncidentMarkerIcon(type) {
+  const typeColors = {
+    'accident': { bg: '#ef4444', emoji: '🚗' },
+    'construction': { bg: '#f59e0b', emoji: '🚧' },
+    'road closure': { bg: '#8b5cf6', emoji: '⛔' },
+    'pothole': { bg: '#6366f1', emoji: '🕳️' },
+    'flooding': { bg: '#0ea5e9', emoji: '🌊' },
+    'debris': { bg: '#78716c', emoji: '🪨' },
+    'other': { bg: '#6b7280', emoji: '⚠️' }
+  };
+  
+  const config = typeColors[type?.toLowerCase()] || typeColors['other'];
+  
+  return L.divIcon({
+    className: 'hazard-div-icon',
+    html: `<div style="background: ${config.bg}; width: 28px; height: 28px; border-radius: 50%; border: 3px solid white; box-shadow: 0 2px 8px rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; font-size: 14px;">${config.emoji}</div>`,
+    iconSize: [28, 28],
+    iconAnchor: [14, 14],
+    popupAnchor: [0, -14]
+  });
+}
+
+// Geocode a location string to coordinates
+async function geocodeLocation(location) {
+  try {
+    const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(location)}&limit=1`);
+    const data = await response.json();
+    if (data && data.length > 0) {
+      return {
+        lat: parseFloat(data[0].lat),
+        lon: parseFloat(data[0].lon)
+      };
+    }
+  } catch (err) {
+    console.error('Geocoding error:', err);
+  }
+  return null;
+}
+
+// Load and display incidents on map
+async function loadIncidentsOnMap() {
+  // Clear existing markers
+  incidentMarkers.forEach(marker => map.removeLayer(marker));
+  incidentMarkers = [];
+  incidentsData = [];
+  
+  try {
+    const res = await fetch(incidentsUrl, fetchOptions);
+    if (!res.ok) return;
+    
+    const data = await res.json();
+    
+    if (Array.isArray(data) && data.length > 0) {
+      for (const incident of data) {
+        const coords = await geocodeLocation(incident.location);
+        if (coords) {
+          incident.coords = coords; // Store coords for route checking
+          incidentsData.push(incident);
+          
+          const marker = L.marker([coords.lat, coords.lon], {
+            icon: getIncidentMarkerIcon(incident.type)
+          }).addTo(map);
+          
+          marker.bindPopup(`
+            <div style="min-width: 150px;">
+              <strong style="color: #ef4444;">${incident.type}</strong><br>
+              <span style="color: #64748b; font-size: 12px;">📍 ${incident.location}</span>
+              ${incident.details ? `<br><span style="font-size: 12px; color: #475569;">${incident.details}</span>` : ''}
+            </div>
+          `);
+          
+          incidentMarkers.push(marker);
+        }
+        // Small delay to avoid rate limiting on geocoding API
+        await new Promise(resolve => setTimeout(resolve, 200));
+      }
+    }
+  } catch (err) {
+    console.error('Error loading incidents:', err);
+  }
+}
+
+// Check if a route passes near any incidents
+function checkRouteForHazards(routePoints) {
+  const HAZARD_PROXIMITY_METERS = 500; // Alert if route is within 500m of hazard
+  const hazardsNearRoute = [];
+  
+  for (const incident of incidentsData) {
+    if (!incident.coords) continue;
+    
+    // Check each point on route against incident
+    for (const point of routePoints) {
+      const distance = getDistanceFromLatLon(
+        point[0], point[1],
+        incident.coords.lat, incident.coords.lon
+      );
+      
+      if (distance < HAZARD_PROXIMITY_METERS) {
+        hazardsNearRoute.push({
+          ...incident,
+          distanceFromRoute: Math.round(distance)
+        });
+        break; // Only add each incident once
+      }
+    }
+  }
+  
+  return hazardsNearRoute;
+}
+
+// Show hazard warning modal
+function showHazardWarning(hazards, onContinue, onReroute) {
+  // Remove any existing modal
+  const existingModal = document.getElementById('hazard-warning-modal');
+  if (existingModal) existingModal.remove();
+  
+  const hazardListHtml = hazards.map(h => `
+    <div style="display: flex; align-items: center; gap: 12px; padding: 12px; background: rgba(239, 68, 68, 0.1); border-radius: 10px; margin-bottom: 8px;">
+      <span style="font-size: 24px;">${getHazardEmoji(h.type)}</span>
+      <div>
+        <div style="font-weight: 600; color: #fef2f2;">${h.type}</div>
+        <div style="font-size: 12px; color: #fca5a5;">📍 ${h.location}</div>
+        <div style="font-size: 11px; color: #f87171;">~${h.distanceFromRoute}m from your route</div>
+      </div>
+    </div>
+  `).join('');
+  
+  const modal = document.createElement('div');
+  modal.id = 'hazard-warning-modal';
+  modal.className = 'fixed inset-0 bg-black/70 backdrop-blur-sm z-[9999] flex items-center justify-center p-4';
+  modal.innerHTML = `
+    <div style="background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); border-radius: 20px; padding: 28px; max-width: 450px; width: 100%; border: 1px solid #ef4444; box-shadow: 0 0 40px rgba(239, 68, 68, 0.3);">
+      <div style="text-align: center; margin-bottom: 20px;">
+        <div style="width: 64px; height: 64px; background: linear-gradient(135deg, #ef4444, #dc2626); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; font-size: 32px;">
+          ⚠️
+        </div>
+        <h3 style="font-size: 22px; font-weight: 700; color: white; margin: 0 0 4px;">Hazard Alert!</h3>
+        <p style="color: #94a3b8; font-size: 14px; margin: 0;">${hazards.length} reported incident${hazards.length > 1 ? 's' : ''} along your route</p>
+      </div>
+      
+      <div style="max-height: 200px; overflow-y: auto; margin-bottom: 20px;">
+        ${hazardListHtml}
+      </div>
+      
+      <div style="display: flex; gap: 12px;">
+        <button id="hazard-continue-btn" style="flex: 1; padding: 14px; border-radius: 12px; border: 2px solid #f59e0b; background: transparent; color: #fbbf24; font-weight: 600; cursor: pointer; transition: all 0.2s;">
+          ⚡ Continue Anyway
+        </button>
+        <button id="hazard-acknowledged-btn" style="flex: 1; padding: 14px; border-radius: 12px; border: none; background: linear-gradient(135deg, #22c55e, #16a34a); color: white; font-weight: 600; cursor: pointer; transition: all 0.2s;">
+          ✓ Acknowledged
+        </button>
+      </div>
+      
+      <p style="text-align: center; margin-top: 12px; font-size: 12px; color: #64748b;">
+        Tip: Check the map for hazard markers 🔴
+      </p>
+    </div>
+  `;
+  
+  document.body.appendChild(modal);
+  
+  // Event handlers
+  document.getElementById('hazard-continue-btn').addEventListener('click', () => {
+    modal.remove();
+    if (onContinue) onContinue();
+  });
+  
+  document.getElementById('hazard-acknowledged-btn').addEventListener('click', () => {
+    modal.remove();
+    if (onContinue) onContinue();
+  });
+  
+  // Close on background click
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      modal.remove();
+      if (onContinue) onContinue();
+    }
+  });
+}
+
+function getHazardEmoji(type) {
+  const emojis = {
+    'accident': '🚗',
+    'construction': '🚧',
+    'road closure': '⛔',
+    'pothole': '🕳️',
+    'flooding': '🌊',
+    'debris': '🪨',
+    'other': '⚠️'
+  };
+  return emojis[type?.toLowerCase()] || '⚠️';
+}
+
+// Initialize incidents on map load
+loadIncidentsOnMap();
+
+// Refresh incidents periodically (every 5 minutes)
+setInterval(loadIncidentsOnMap, 5 * 60 * 1000);
 
 // =====================================================
 // REAL-TIME VEHICLE TRACKING SYSTEM
@@ -542,6 +750,14 @@ document.getElementById('fetch_routes_btn').addEventListener('click', async () =
           // Add destination marker
           const lastPoint = decoded[decoded.length - 1];
           L.marker(lastPoint, { icon: destinationIcon }).addTo(map);
+          
+          // Check for hazards along the route
+          const hazardsOnRoute = checkRouteForHazards(decoded);
+          if (hazardsOnRoute.length > 0) {
+            showHazardWarning(hazardsOnRoute, () => {
+              console.log('User acknowledged hazards');
+            });
+          }
         }
       }
     });

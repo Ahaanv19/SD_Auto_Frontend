@@ -630,7 +630,9 @@ nav: true
 
   loadDay(currentDayIndex);
 
-  const map = L.map('map').setView([37.7749, -122.4194], 10);
+  // Make map globally accessible for resize handling
+  window.routineMap = L.map('map').setView([37.7749, -122.4194], 10);
+  const map = window.routineMap;
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19 }).addTo(map);
 
   let currentRouteControl = null;
@@ -733,6 +735,13 @@ updateCurrentHourRoute();
     document.getElementById('access-loading').style.display = 'none';
     document.getElementById('access-denied').style.display = 'none';
     document.getElementById('main-content').style.display = 'block';
+    
+    // Fix Leaflet map rendering - invalidate size after container becomes visible
+    setTimeout(() => {
+      if (window.routineMap) {
+        window.routineMap.invalidateSize();
+      }
+    }, 100);
   }
   
   function showAccessDenied() {

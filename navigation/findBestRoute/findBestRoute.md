@@ -966,6 +966,32 @@ nav: true
 
 <div id="map"></div>
 
+<!-- Hazard Legend -->
+<div class="hazard-legend" style="max-width: 900px; margin: 16px auto 0; padding: 16px 20px; background: linear-gradient(135deg, #fef2f2 0%, #fff1f2 100%); border: 1px solid #fecaca; border-radius: 14px; display: flex; align-items: center; gap: 24px; flex-wrap: wrap;">
+  <div style="display: flex; align-items: center; gap: 8px;">
+    <span style="font-size: 18px;">⚠️</span>
+    <span style="font-weight: 600; color: #991b1b; font-size: 14px;">Live Hazards on Map:</span>
+  </div>
+  <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+    <span style="display: flex; align-items: center; gap: 6px; font-size: 13px; color: #7f1d1d;">
+      <span style="width: 20px; height: 20px; background: #ef4444; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px;">🚗</span>
+      Accident
+    </span>
+    <span style="display: flex; align-items: center; gap: 6px; font-size: 13px; color: #7f1d1d;">
+      <span style="width: 20px; height: 20px; background: #f59e0b; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px;">🚧</span>
+      Construction
+    </span>
+    <span style="display: flex; align-items: center; gap: 6px; font-size: 13px; color: #7f1d1d;">
+      <span style="width: 20px; height: 20px; background: #8b5cf6; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px;">⛔</span>
+      Closure
+    </span>
+    <span style="display: flex; align-items: center; gap: 6px; font-size: 13px; color: #7f1d1d;">
+      <span style="width: 20px; height: 20px; background: #6b7280; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px;">⚠️</span>
+      Other
+    </span>
+  </div>
+</div>
+
 <!-- Share Route Button -->
 <div id="share-route-container" style="display: none; margin-top: 20px; text-align: center;">
   <button id="share-route-btn" type="button" onclick="openShareModal()" style="background: linear-gradient(135deg, #0066cc 0%, #06b6d4 100%); color: white; border: none; padding: 12px 24px; border-radius: 12px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 4px 15px rgba(0, 102, 204, 0.3);">
