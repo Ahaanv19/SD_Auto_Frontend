@@ -18,7 +18,7 @@ search_exclude: true
       <h2 class="text-3xl font-bold text-primary mb-6 text-center">User Login</h2>
       <form id="pythonForm" onsubmit="pythonLogin(); return false;" class="space-y-6">
         <div>
-          <label for="uid" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">GitHub ID</label>
+          <label for="uid" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Username</label>
           <input type="text" id="uid" name="uid" required
             class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white/80 dark:bg-gray-900/60 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-primary transition" />
         </div>
@@ -29,7 +29,7 @@ search_exclude: true
         </div>
         <p id="message" class="text-sm text-red-500 font-medium"></p>
         <button type="submit"
-          class="w-full py-2 px-4 bg-primary hover:bg-secondary text-white font-semibold rounded-lg shadow-md transition transform hover:scale-105 duration-300">
+          class="w-full py-2 px-4 bg-primary hover:bg-secondary text-black font-semibold rounded-lg shadow-md transition transform hover:scale-105 duration-300">
           Login 🚀
         </button>
       </form>
@@ -37,7 +37,7 @@ search_exclude: true
 
     <!-- Signup Form -->
     <div class="flex-1 p-8 bg-white/70 dark:bg-gray-800/70 backdrop-blur-md shadow-2xl border border-gray-200 dark:border-gray-700 rounded-2xl">
-      <h2 class="text-3xl font-bold text-primary mb-6 text-center">Sign Up: If your name and location have not been verfied by admin, your acount will be deleted. Please create account using name you were verfied with</h2>
+      <h2 class="text-3xl font-bold text-primary mb-6 text-center">Sign Up: Create an Account for Free!</h2>
       <form id="signupForm" onsubmit="signup(); return false;" class="space-y-6">
         <div>
           <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Name</label>
@@ -45,7 +45,7 @@ search_exclude: true
             class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white/80 dark:bg-gray-900/60 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-primary transition" />
         </div>
         <div>
-          <label for="signupUid" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">GitHub ID</label>
+          <label for="signupUid" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Username</label>
           <input type="text" id="signupUid" name="signupUid" required
             class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white/80 dark:bg-gray-900/60 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-primary transition" />
         </div>
@@ -56,7 +56,7 @@ search_exclude: true
         </div>
         <p id="signupMessage" class="text-sm text-green-500 font-medium"></p>
         <button type="submit"
-          class="w-full py-2 px-4 bg-primary hover:bg-secondary text-white font-semibold rounded-lg shadow-md transition transform hover:scale-105 duration-300">
+          class="w-full py-2 px-4 bg-primary hover:bg-secondary text-black font-semibold rounded-lg shadow-md transition transform hover:scale-105 duration-300">
           Sign Up 📝
         </button>
       </form>
