@@ -105,7 +105,7 @@ menu: nav/home.html
       <!-- Actions -->
       <div id="actions-section" class="space-y-3">
         <!-- Upgrade Button (for free users) -->
-        <a id="upgrade-btn" href="{{site.baseurl}}/subscription/pricing" class="hidden w-full py-4 px-6 rounded-xl bg-gradient-to-r from-green-500 to-green-600 text-white font-semibold text-center transition-all duration-300 hover:from-green-600 hover:to-green-700 shadow-lg shadow-green-500/30 block">
+        <a id="upgrade-btn" href="{{site.baseurl}}/pricing" class="hidden w-full py-4 px-6 rounded-xl bg-gradient-to-r from-green-500 to-green-600 text-white font-semibold text-center transition-all duration-300 hover:from-green-600 hover:to-green-700 shadow-lg shadow-green-500/30 block">
           Upgrade Your Plan
         </a>
         

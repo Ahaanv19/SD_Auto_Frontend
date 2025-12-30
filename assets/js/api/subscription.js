@@ -230,7 +230,7 @@ export async function getLimit(resource) {
  * @param {string} redirectUrl - URL to redirect to if requirement not met
  * @returns {Promise<boolean>}
  */
-export async function requireTier(requiredTier, redirectUrl = '/subscription/pricing') {
+export async function requireTier(requiredTier, redirectUrl = '/pricing') {
   const hasRequiredAccess = await hasAccess(requiredTier);
   
   if (!hasRequiredAccess) {
@@ -257,7 +257,7 @@ export async function checkAccessWithPrompt(requiredTier, featureName) {
     
     if (confirm(`${featureName} requires a ${tierName} subscription. Would you like to upgrade?`)) {
       const baseUrl = document.querySelector('meta[name="baseurl"]')?.content || '';
-      window.location.href = `${baseUrl}/subscription/pricing`;
+      window.location.href = `${baseUrl}/pricing`;
     }
     return false;
   }

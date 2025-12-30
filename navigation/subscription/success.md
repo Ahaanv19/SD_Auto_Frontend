@@ -121,7 +121,7 @@ menu: nav/home.html
       <h2 class="text-3xl font-bold text-white mb-4">Verification Failed</h2>
       <p id="error-message" class="text-gray-400 mb-8">We couldn't verify your payment. Please contact support if you were charged.</p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a href="{{site.baseurl}}/subscription/pricing" class="py-3 px-8 rounded-xl bg-gradient-to-r from-green-500 to-green-600 text-white font-semibold transition-all duration-300 hover:from-green-600 hover:to-green-700">
+        <a href="{{site.baseurl}}/pricing" class="py-3 px-8 rounded-xl bg-gradient-to-r from-green-500 to-green-600 text-white font-semibold transition-all duration-300 hover:from-green-600 hover:to-green-700">
           Try Again
         </a>
         <a href="{{site.baseurl}}/subscription/manage" class="py-3 px-8 rounded-xl bg-gray-700 text-white font-semibold transition-all duration-300 hover:bg-gray-600">

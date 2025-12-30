@@ -18,7 +18,7 @@ menu: nav/home.html
     <!-- Checkout Content -->
     <div id="checkout-content" class="hidden">
       <!-- Back Button -->
-      <a href="{{site.baseurl}}/subscription/pricing" class="inline-flex items-center text-gray-400 hover:text-white mb-8 transition-colors">
+      <a href="{{site.baseurl}}/pricing" class="inline-flex items-center text-gray-400 hover:text-white mb-8 transition-colors">
         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
         </svg>
@@ -285,7 +285,7 @@ menu: nav/home.html
       </div>
       <h2 class="text-3xl font-bold text-white mb-4">Something Went Wrong</h2>
       <p id="error-message" class="text-gray-400 mb-8">Please try again or contact support.</p>
-      <a href="{{site.baseurl}}/subscription/pricing" class="inline-block py-3 px-8 rounded-xl bg-gradient-to-r from-green-500 to-green-600 text-white font-semibold transition-all duration-300 hover:from-green-600 hover:to-green-700">
+      <a href="{{site.baseurl}}/pricing" class="inline-block py-3 px-8 rounded-xl bg-gradient-to-r from-green-500 to-green-600 text-white font-semibold transition-all duration-300 hover:from-green-600 hover:to-green-700">
         Try Again
       </a>
     </div>
