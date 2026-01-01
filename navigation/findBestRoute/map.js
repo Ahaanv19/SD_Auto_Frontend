@@ -4,6 +4,10 @@ import polyline from 'https://cdn.skypack.dev/@mapbox/polyline';
 const apiUrl = `${pythonURI}/api/get_routes`;
 const routeUsageUrl = `${pythonURI}/api/subscription/route-usage`;
 const incidentsUrl = `${pythonURI}/api/incidents`;
+const businessesUrl = `${pythonURI}/api/businesses`;
+
+// Spotlight storage key
+const SPOTLIGHT_STORAGE_KEY = 'sd_auto_spotlighted_businesses';
 
 // Get the base URL from the page (set by Jekyll)
 function getBaseUrl() {
@@ -232,6 +236,312 @@ loadIncidentsOnMap();
 
 // Refresh incidents periodically (every 5 minutes)
 setInterval(loadIncidentsOnMap, 5 * 60 * 1000);
+
+// =====================================================
+// SPOTLIGHTED BUSINESSES MARKERS SYSTEM
+// =====================================================
+let businessMarkers = [];
+let businessesData = [];
+
+// Default business data (coordinates for San Diego area businesses)
+const defaultBusinesses = [
+  {
+    id: 1,
+    name: "ActiveMed Integrative Health Center",
+    description: "We believe in a collaborative approach to healthcare. We offer acupuncture, massage therapy, functional medicine, physical therapy, and axon therapy.",
+    address: "11588 Via Rancho San Diego, Suite 101, El Cajon, CA 92019",
+    website: "https://activemedhealth.com/",
+    category: "Healthcare",
+    coordinates: { lat: 32.7914, lng: -116.9259 }
+  },
+  {
+    id: 2,
+    name: "Digital One Printing",
+    description: "Digital One Printing is your premier one-stop Poway printshop that offers a wide range of services.",
+    address: "12630 Poway Rd, Poway, CA 92064",
+    website: "https://d1printing.net/",
+    category: "Printing Services",
+    coordinates: { lat: 32.9579, lng: -117.0287 }
+  }
+];
+
+// Get spotlighted business IDs from localStorage
+function getSpotlightedBusinessIds() {
+  try {
+    const stored = localStorage.getItem(SPOTLIGHT_STORAGE_KEY);
+    return stored ? JSON.parse(stored) : [];
+  } catch {
+    return [];
+  }
+}
+
+// Get category emoji for business marker
+function getCategoryEmoji(category) {
+  const emojis = {
+    'Healthcare': '🏥',
+    'Health': '🏥',
+    'Medical': '🏥',
+    'Printing Services': '🖨️',
+    'Print': '🖨️',
+    'Restaurant': '🍽️',
+    'Food': '🍽️',
+    'Cafe': '☕',
+    'Coffee': '☕',
+    'Shopping': '🛍️',
+    'Retail': '🛍️',
+    'Automotive': '🚗',
+    'Auto': '🚗',
+    'Gym': '💪',
+    'Fitness': '💪',
+    'Entertainment': '🎭',
+    'Hotel': '🏨',
+    'Bank': '🏦',
+    'Finance': '🏦',
+    'Education': '📚',
+    'School': '📚',
+    'Gas Station': '⛽',
+    'Pharmacy': '💊',
+    'Grocery': '🛒',
+    'default': '🏢'
+  };
+  
+  if (!category) return emojis.default;
+  
+  for (const [key, emoji] of Object.entries(emojis)) {
+    if (category.toLowerCase().includes(key.toLowerCase())) {
+      return emoji;
+    }
+  }
+  
+  return emojis.default;
+}
+
+// Create business marker icon
+function getBusinessMarkerIcon(business, isHighlighted = true) {
+  const emoji = getCategoryEmoji(business.category);
+  const iconSize = isHighlighted ? 44 : 36;
+  
+  return L.divIcon({
+    className: 'business-div-icon',
+    html: `
+      <div style="
+        width: ${iconSize}px;
+        height: ${iconSize}px;
+        background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        border-radius: 50%;
+        border: 3px solid white;
+        box-shadow: 0 4px 15px rgba(16, 185, 129, 0.5), 0 0 20px rgba(16, 185, 129, 0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: ${isHighlighted ? '20px' : '16px'};
+        cursor: pointer;
+        animation: business-pulse 2s infinite;
+      ">
+        ${emoji}
+      </div>
+      <style>
+        @keyframes business-pulse {
+          0%, 100% { box-shadow: 0 4px 15px rgba(16, 185, 129, 0.5), 0 0 20px rgba(16, 185, 129, 0.3); }
+          50% { box-shadow: 0 4px 20px rgba(16, 185, 129, 0.7), 0 0 30px rgba(16, 185, 129, 0.5); }
+        }
+      </style>
+    `,
+    iconSize: [iconSize, iconSize],
+    iconAnchor: [iconSize / 2, iconSize / 2],
+    popupAnchor: [0, -iconSize / 2]
+  });
+}
+
+// Create popup content for business marker
+function createBusinessPopupContent(business) {
+  const emoji = getCategoryEmoji(business.category);
+  return `
+    <div style="min-width: 200px; max-width: 280px;">
+      <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+        <span style="font-size: 24px;">${emoji}</span>
+        <strong style="color: #1e293b; font-size: 14px; line-height: 1.3;">${business.name}</strong>
+      </div>
+      <div style="display: inline-flex; align-items: center; gap: 4px; padding: 4px 8px; background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(6, 182, 212, 0.1)); border-radius: 6px; margin-bottom: 8px;">
+        <span style="font-size: 10px;">⭐</span>
+        <span style="font-size: 11px; font-weight: 600; color: #10b981;">Spotlighted</span>
+      </div>
+      <div style="font-size: 12px; color: #64748b; margin-bottom: 8px;">
+        <span style="display: flex; align-items: flex-start; gap: 4px;">
+          📍 ${business.address || 'San Diego, CA'}
+        </span>
+      </div>
+      ${business.description ? `
+        <p style="font-size: 12px; color: #475569; margin: 0 0 10px; line-height: 1.4; max-height: 60px; overflow: hidden;">
+          ${business.description.substring(0, 100)}${business.description.length > 100 ? '...' : ''}
+        </p>
+      ` : ''}
+      <div style="display: flex; gap: 8px;">
+        <a href="${business.website}" target="_blank" 
+           style="flex: 1; display: inline-flex; align-items: center; justify-content: center; gap: 4px; padding: 8px 12px; background: linear-gradient(135deg, #0066cc 0%, #004d99 100%); color: white; border-radius: 8px; font-size: 12px; font-weight: 600; text-decoration: none;">
+          Visit Site
+        </a>
+        <button onclick="window.setRouteDestination && window.setRouteDestination('${(business.address || business.name).replace(/'/g, "\\'")}')"
+                style="flex: 1; display: inline-flex; align-items: center; justify-content: center; gap: 4px; padding: 8px 12px; background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; border-radius: 8px; font-size: 12px; font-weight: 600; border: none; cursor: pointer;">
+          🧭 Navigate
+        </button>
+      </div>
+    </div>
+  `;
+}
+
+// Load and display spotlighted businesses on map
+async function loadSpotlightedBusinessesOnMap() {
+  // Clear existing business markers
+  businessMarkers.forEach(marker => map.removeLayer(marker));
+  businessMarkers = [];
+  
+  const spotlightedIds = getSpotlightedBusinessIds();
+  
+  if (spotlightedIds.length === 0) {
+    // Update legend visibility
+    updateBusinessLegend(false);
+    return;
+  }
+  
+  // Try to fetch businesses from API, fallback to defaults
+  let businesses = defaultBusinesses;
+  try {
+    const response = await fetch(businessesUrl, fetchOptions);
+    if (response.ok) {
+      businesses = await response.json();
+    }
+  } catch (err) {
+    console.log('Using default business data');
+  }
+  
+  // Filter to only spotlighted businesses
+  const spotlightedBusinesses = businesses.filter(b => spotlightedIds.includes(b.id));
+  businessesData = spotlightedBusinesses;
+  
+  // Add markers for spotlighted businesses
+  for (const business of spotlightedBusinesses) {
+    let coords = business.coordinates;
+    
+    // If no coordinates, try to geocode the address
+    if (!coords && business.address) {
+      coords = await geocodeLocation(business.address);
+      if (coords) {
+        business.coordinates = coords;
+      }
+    }
+    
+    if (coords) {
+      const lat = coords.lat || coords.latitude;
+      const lng = coords.lng || coords.lon || coords.longitude;
+      
+      const marker = L.marker([lat, lng], {
+        icon: getBusinessMarkerIcon(business, true)
+      }).addTo(map);
+      
+      marker.bindPopup(createBusinessPopupContent(business));
+      
+      businessMarkers.push(marker);
+    }
+  }
+  
+  // Update legend visibility
+  updateBusinessLegend(spotlightedBusinesses.length > 0);
+}
+
+// Update the business legend visibility
+function updateBusinessLegend(show) {
+  let legend = document.getElementById('business-legend');
+  
+  if (show && !legend) {
+    // Create legend if it doesn't exist
+    legend = document.createElement('div');
+    legend.id = 'business-legend';
+    legend.className = 'business-legend';
+    legend.style.cssText = `
+      max-width: 900px;
+      margin: 16px auto 0;
+      padding: 16px 20px;
+      background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);
+      border: 1px solid #86efac;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    `;
+    legend.innerHTML = `
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <span style="font-size: 18px;">⭐</span>
+        <span style="font-weight: 600; color: #166534; font-size: 14px;">Spotlighted Businesses on Map:</span>
+      </div>
+      <div style="display: flex; gap: 16px; flex-wrap: wrap;" id="business-legend-items">
+      </div>
+      <a href="${getBaseUrl()}/localbusinesses/" style="margin-left: auto; display: flex; align-items: center; gap: 6px; font-size: 13px; color: #0066cc; font-weight: 600; text-decoration: none;">
+        Manage Spotlights →
+      </a>
+    `;
+    
+    // Insert after hazard legend
+    const hazardLegend = document.querySelector('.hazard-legend');
+    if (hazardLegend) {
+      hazardLegend.parentNode.insertBefore(legend, hazardLegend.nextSibling);
+    } else {
+      const mapEl = document.getElementById('map');
+      if (mapEl) {
+        mapEl.parentNode.insertBefore(legend, mapEl.nextSibling);
+      }
+    }
+  }
+  
+  if (legend) {
+    legend.style.display = show ? 'flex' : 'none';
+    
+    if (show) {
+      // Update legend items
+      const itemsContainer = document.getElementById('business-legend-items');
+      if (itemsContainer) {
+        itemsContainer.innerHTML = businessesData.map(b => `
+          <span style="display: flex; align-items: center; gap: 6px; font-size: 13px; color: #166534;">
+            <span style="width: 24px; height: 24px; background: linear-gradient(135deg, #10b981, #059669); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; box-shadow: 0 2px 6px rgba(16, 185, 129, 0.4);">${getCategoryEmoji(b.category)}</span>
+            ${b.name}
+          </span>
+        `).join('');
+      }
+    }
+  }
+}
+
+// Set destination from business popup
+window.setRouteDestination = function(address) {
+  const destinationInput = document.getElementById('destination');
+  if (destinationInput) {
+    destinationInput.value = address;
+    destinationInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    destinationInput.focus();
+    
+    // Flash the input to draw attention
+    destinationInput.style.transition = 'box-shadow 0.3s ease';
+    destinationInput.style.boxShadow = '0 0 0 3px rgba(16, 185, 129, 0.5)';
+    setTimeout(() => {
+      destinationInput.style.boxShadow = '';
+    }, 1500);
+  }
+};
+
+// Initialize spotlighted businesses on map load
+loadSpotlightedBusinessesOnMap();
+
+// Listen for spotlight changes
+window.addEventListener('storage', (e) => {
+  if (e.key === SPOTLIGHT_STORAGE_KEY) {
+    loadSpotlightedBusinessesOnMap();
+  }
+});
+
+window.addEventListener('businessSpotlightChanged', () => {
+  loadSpotlightedBusinessesOnMap();
+});
 
 // =====================================================
 // REAL-TIME VEHICLE TRACKING SYSTEM
