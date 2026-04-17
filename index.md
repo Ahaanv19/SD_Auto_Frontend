@@ -128,41 +128,6 @@ menu: nav/home.html
       border-radius: 24px;
     }
 
-    /* Theme Toggle Styles */
-    .theme-toggle {
-      position: fixed;
-      bottom: 24px;
-      right: 24px;
-      z-index: 1000;
-      width: 56px;
-      height: 56px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #0066cc 0%, #06b6d4 100%);
-      border: none;
-      cursor: pointer;
-      box-shadow: 0 4px 20px rgba(0, 102, 204, 0.4);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.3s ease;
-    }
-
-    .theme-toggle:hover {
-      transform: scale(1.1);
-      box-shadow: 0 6px 30px rgba(0, 102, 204, 0.5);
-    }
-
-    .theme-toggle svg {
-      width: 24px;
-      height: 24px;
-      color: white;
-      transition: transform 0.5s ease;
-    }
-
-    .theme-toggle:hover svg {
-      transform: rotate(180deg);
-    }
-
     /* Mobile Navigation */
     .mobile-nav-toggle {
       display: none;
@@ -434,16 +399,6 @@ menu: nav/home.html
     </a>
   </nav>
 
-  <!-- Theme Toggle Button -->
-  <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
-    <svg id="sunIcon" class="hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-    </svg>
-    <svg id="moonIcon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-    </svg>
-  </button>
-
   <main class="relative overflow-hidden">
 
     <!-- Hero Section -->
@@ -499,7 +454,7 @@ menu: nav/home.html
                 <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
                   <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                 </svg>
-                <span>100% Free</span>
+                <span>Optimized for San Diego</span>
               </div>
             </div>
           </div>
@@ -956,36 +911,6 @@ menu: nav/home.html
 
   <!-- JavaScript -->
   <script>
-    // Theme Toggle Functionality
-    const themeToggle = document.getElementById('themeToggle');
-    const sunIcon = document.getElementById('sunIcon');
-    const moonIcon = document.getElementById('moonIcon');
-    const html = document.documentElement;
-
-    // Check for saved theme preference or default to system preference
-    const savedTheme = localStorage.getItem('theme');
-    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    
-    if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
-      html.classList.add('dark');
-      sunIcon.classList.remove('hidden');
-      moonIcon.classList.add('hidden');
-    }
-
-    themeToggle.addEventListener('click', () => {
-      html.classList.toggle('dark');
-      const isDark = html.classList.contains('dark');
-      localStorage.setItem('theme', isDark ? 'dark' : 'light');
-      
-      if (isDark) {
-        sunIcon.classList.remove('hidden');
-        moonIcon.classList.add('hidden');
-      } else {
-        sunIcon.classList.add('hidden');
-        moonIcon.classList.remove('hidden');
-      }
-    });
-
     // Mobile Navigation
     const mobileNavToggle = document.getElementById('mobileNavToggle');
     const mobileNavOverlay = document.getElementById('mobileNavOverlay');
