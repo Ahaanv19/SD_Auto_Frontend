@@ -1,38 +1,119 @@
 ---
-layout: post
+layout: base
 title: Profile Settings
 permalink: /profile
-menu: nav/home.html
 search_exclude: true
-show_reading_time: false
 ---
-<div class="profile-container">
- <div class="card">
-   <form>
-     <div>
-       <label for="newUid">Enter New UID:</label>
-       <input type="text" id="newUid" placeholder="New UID">
-     </div>
-     <div>
-       <label for="newName">Enter New Name:</label>
-       <input type="text" id="newName" placeholder="New Name">
-     </div>
-      <div>
-       <label for="newPassword">Enter New Password:</label>
-       <input type="text" id="newPassword" placeholder="New Password">
-     </div>
-     <br>
-     <br>
-     <label for="profilePicture" class="file-icon"> Upload Profile Picture <i class="fas fa-upload"></i> <!-- Replace this with your desired icon -->
-     </label>
-     <input type="file" id="profilePicture" accept="image/*" onchange="saveProfilePicture()">
-     <div class="image-container" id="profileImageBox">
-         <!-- Profile picture will be displayed here -->
-     </div>
-     <p id="profile-message" style="color: red;"></p>
-   </form>
- </div>
-</div>
+
+<style>
+    #profileImageBox img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 9999px;
+    }
+
+    #profileImageBox p {
+        margin: 0;
+        text-align: center;
+        color: #64748b;
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+
+    .dark #profileImageBox p {
+        color: #94a3b8;
+    }
+</style>
+
+<section class="mx-auto max-w-6xl space-y-8">
+    <div class="max-w-3xl space-y-4">
+        <span class="inline-flex items-center gap-2 rounded-full border border-primary-200 bg-primary-50 px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-primary-700 dark:border-primary-900/60 dark:bg-primary-950/40 dark:text-primary-300">
+            Account Center
+        </span>
+        <h1 class="max-w-2xl text-4xl sm:text-5xl">Manage Your SD Auto Profile</h1>
+        <p class="max-w-2xl text-lg text-slate-600 dark:text-slate-300">
+            Update your public account details, rotate credentials, and keep your profile photo current without leaving the dashboard.
+        </p>
+    </div>
+
+    <div class="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
+        <aside class="rounded-[2rem] border border-slate-200/70 bg-white/80 p-8 shadow-medium backdrop-blur-sm dark:border-slate-700/60 dark:bg-slate-900/70">
+            <div class="space-y-6">
+                <div>
+                    <p class="text-sm font-semibold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">Profile Photo</p>
+                    <h2 class="mt-3 text-3xl">Your Account Identity</h2>
+                    <p class="mt-3 text-sm leading-7 text-slate-600 dark:text-slate-300">
+                        Use a clear profile image so your account is recognizable across saved routes, reports, and subscription tools.
+                    </p>
+                </div>
+
+                <div class="rounded-[1.75rem] border border-slate-200/70 bg-slate-50/80 p-6 dark:border-slate-700/60 dark:bg-slate-950/40">
+                    <div id="profileImageBox" class="mx-auto flex h-52 w-52 items-center justify-center overflow-hidden rounded-full border border-dashed border-slate-300 bg-white p-3 shadow-soft dark:border-slate-700 dark:bg-slate-900">
+                        <p>No profile picture available.</p>
+                    </div>
+
+                    <input type="file" id="profilePicture" class="sr-only" accept="image/*" onchange="saveProfilePicture()">
+
+                    <label for="profilePicture" class="mt-6 inline-flex w-full cursor-pointer items-center justify-center gap-2 rounded-2xl border border-slate-200 bg-white px-5 py-4 text-sm font-semibold text-slate-700 transition hover:border-primary-400 hover:text-primary-700 hover:shadow-soft dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:hover:border-primary-500 dark:hover:text-primary-300">
+                        <i class="fas fa-upload"></i>
+                        Upload Profile Picture
+                    </label>
+
+                    <p id="profile-message" class="mt-4 min-h-6 text-sm font-medium text-rose-600 dark:text-rose-400"></p>
+                </div>
+
+                <div class="rounded-[1.5rem] border border-slate-200/70 bg-slate-50/80 p-6 dark:border-slate-700/60 dark:bg-slate-950/40">
+                    <h3 class="text-xl">Before You Update</h3>
+                    <ul class="mt-4 space-y-3 text-sm leading-7 text-slate-600 dark:text-slate-300">
+                        <li>Changing your username or password signs you out immediately.</li>
+                        <li>Name updates apply to the visible account label in the shared shell.</li>
+                        <li>Your current values are loaded into the field placeholders when available.</li>
+                    </ul>
+                </div>
+            </div>
+        </aside>
+
+        <section class="rounded-[2rem] border border-slate-200/70 bg-white/80 p-8 shadow-medium backdrop-blur-sm dark:border-slate-700/60 dark:bg-slate-900/70">
+            <div class="space-y-3">
+                <p class="text-sm font-semibold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">Account Details</p>
+                <h2 class="text-3xl">Security And Identity</h2>
+                <p class="text-sm leading-7 text-slate-600 dark:text-slate-300">
+                    Each field saves on change, so only update the values you intend to replace.
+                </p>
+            </div>
+
+            <form class="mt-8 grid gap-6">
+                <div class="rounded-[1.5rem] border border-slate-200/70 bg-slate-50/70 p-6 dark:border-slate-700/60 dark:bg-slate-950/30">
+                    <label for="newUid" class="text-sm font-semibold uppercase tracking-[0.14em] text-slate-500 dark:text-slate-400">Username</label>
+                    <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">Update the unique ID you use to sign in.</p>
+                    <input type="text" id="newUid" placeholder="New username" class="mt-4 w-full" autocomplete="username">
+                    <p id="uid-message" class="mt-3 min-h-5 text-sm font-medium text-rose-600 dark:text-rose-400"></p>
+                </div>
+
+                <div class="rounded-[1.5rem] border border-slate-200/70 bg-slate-50/70 p-6 dark:border-slate-700/60 dark:bg-slate-950/30">
+                    <label for="newName" class="text-sm font-semibold uppercase tracking-[0.14em] text-slate-500 dark:text-slate-400">Display Name</label>
+                    <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">Control how your account appears in shared navigation and profile surfaces.</p>
+                    <input type="text" id="newName" placeholder="New display name" class="mt-4 w-full" autocomplete="name">
+                    <p id="name-message" class="mt-3 min-h-5 text-sm font-medium text-rose-600 dark:text-rose-400"></p>
+                </div>
+
+                <div class="rounded-[1.5rem] border border-slate-200/70 bg-slate-50/70 p-6 dark:border-slate-700/60 dark:bg-slate-950/30">
+                    <label for="newPassword" class="text-sm font-semibold uppercase tracking-[0.14em] text-slate-500 dark:text-slate-400">Password</label>
+                    <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">Choose a fresh password if you need to rotate credentials.</p>
+                    <input type="password" id="newPassword" placeholder="New password" class="mt-4 w-full" autocomplete="new-password">
+                    <p id="password-message" class="mt-3 min-h-5 text-sm font-medium text-rose-600 dark:text-rose-400"></p>
+                </div>
+            </form>
+
+            <div class="mt-8 hidden" aria-hidden="true">
+                <table class="w-full">
+                    <tbody id="profileResult"></tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+</section>
 
 <script type="module">
 // Import fetchOptions from config.js
@@ -43,12 +124,16 @@ import { putUpdate, postUpdate, deleteData, logoutUser } from "{{site.baseurl}}/
 // Function to update table with fetched data
 function updateTableWithData(data) {
    const tableBody = document.getElementById('profileResult');
+   if (!tableBody) {
+       return;
+   }
    tableBody.innerHTML = '';
 
    data.sections.forEach((section, index) => {
        const tr = document.createElement('tr');
        const themeCell = document.createElement('td');
        const nameCell = document.createElement('td');
+       const yearCell = document.createElement('td');
 
        themeCell.textContent = section.theme;
        nameCell.textContent = section.name;
@@ -119,6 +204,7 @@ function updateTableWithData(data) {
        });
        tr.appendChild(themeCell);
        tr.appendChild(nameCell);
+       tr.appendChild(yearCell);
 
        tableBody.appendChild(tr);
    });
@@ -328,6 +414,23 @@ document.getElementById('newPassword').addEventListener('change', function() {
 });
 
 // Function to fetch Name from backend
+window.fetchUid = async function() {
+    const URL = pythonURI + "/api/user";
+
+    try {
+        const response = await fetch(URL, fetchOptions);
+        if (!response.ok) {
+            throw new Error(`Failed to fetch UID: ${response.status}`);
+        }
+
+        const data = await response.json();
+        return data.uid;
+    } catch (error) {
+        console.error('Error fetching UID:', error.message);
+        return null;
+    }
+};
+
 window.fetchName = async function() {
     const URL = pythonURI + "/api/user"; // Adjusted endpoint
 

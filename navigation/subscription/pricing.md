@@ -6,310 +6,373 @@ search_exclude: true
 menu: nav/home.html
 ---
 
-<div id="pricing-container" class="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 py-16 px-4 sm:px-6 lg:px-8">
-  <!-- Premium Badge -->
-  <div class="flex justify-center mb-8">
-    <div class="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-yellow-500/20 to-yellow-600/20 border border-yellow-500/30">
-      <svg class="w-5 h-5 text-yellow-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
-        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-      </svg>
-      <span class="text-yellow-400 font-semibold">SD Auto Premium</span>
+<style>
+  #pricing-container .pricing-stage {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #0b1320 0%, #0f1d32 52%, #12304a 100%);
+    border: 1px solid rgba(148, 163, 184, 0.12);
+    box-shadow: 0 40px 70px -46px rgba(2, 6, 23, 0.68);
+  }
+
+  #pricing-container .pricing-stage::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at top center, rgba(69, 176, 167, 0.18), transparent 26%),
+      radial-gradient(circle at bottom left, rgba(197, 109, 36, 0.16), transparent 28%);
+    pointer-events: none;
+  }
+
+  #pricing-container .pricing-stage > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  #pricing-container .pricing-title,
+  #pricing-container .pricing-card-title,
+  #pricing-container .pricing-faq-title,
+  #pricing-container summary,
+  #pricing-container .subscription-title {
+    color: #f8fafc;
+  }
+
+  #pricing-container .pricing-copy,
+  #pricing-container .pricing-muted,
+  #pricing-container .pricing-feature,
+  #pricing-container .pricing-faq-copy,
+  #pricing-container .pricing-subscription-copy {
+    color: #cbd5e1;
+  }
+
+  #pricing-container .pricing-muted {
+    color: #94a3b8;
+  }
+
+  #pricing-container .pricing-card {
+    background: linear-gradient(180deg, rgba(15, 23, 42, 0.62), rgba(15, 23, 42, 0.82));
+    border: 1px solid rgba(148, 163, 184, 0.14);
+    box-shadow: 0 26px 40px -34px rgba(2, 6, 23, 0.75);
+  }
+
+  #pricing-container .pricing-card-popular {
+    background: linear-gradient(180deg, rgba(17, 138, 136, 0.18), rgba(15, 23, 42, 0.86));
+    border-color: rgba(74, 222, 128, 0.42);
+  }
+
+  #pricing-container .pricing-faq-card {
+    background: rgba(15, 23, 42, 0.64);
+    border: 1px solid rgba(148, 163, 184, 0.14);
+    box-shadow: 0 20px 36px -30px rgba(2, 6, 23, 0.72);
+  }
+
+  #pricing-container summary {
+    list-style: none;
+  }
+
+  #pricing-container summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .pricing-modal-card {
+    background: linear-gradient(180deg, #0f172a, #111c2f);
+    border: 1px solid rgba(148, 163, 184, 0.14);
+    box-shadow: 0 30px 52px -34px rgba(2, 6, 23, 0.75);
+  }
+</style>
+
+<div id="pricing-container" class="space-y-10">
+  <section class="pricing-stage rounded-[2.75rem] px-6 py-10 sm:px-10 lg:px-12">
+    <div class="flex justify-center">
+      <div class="inline-flex items-center gap-2 rounded-full border border-yellow-500/30 bg-yellow-500/10 px-4 py-2">
+        <svg class="h-5 w-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+        </svg>
+        <span class="font-semibold text-yellow-300">SD Auto Premium</span>
+      </div>
     </div>
-  </div>
 
-  <!-- Header -->
-  <div class="text-center mb-12">
-    <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">
-      <span class="bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent">Choose</span> Your Plan
-    </h1>
-    <p class="text-gray-400 text-lg max-w-2xl mx-auto">
-      Unlock the full potential of smart navigation in San Diego
-    </p>
-  </div>
+    <div class="mx-auto mt-8 max-w-3xl text-center">
+      <h1 class="pricing-title text-4xl font-bold tracking-tight md:text-6xl">Choose The Plan That Fits Your Commute</h1>
+      <p class="pricing-copy mx-auto mt-5 max-w-2xl text-lg leading-8">
+        Upgrade only when you need more routing power. Every tier is designed around a clearer, more dependable San Diego travel workflow.
+      </p>
+    </div>
 
-  <!-- Billing Toggle -->
-  <div class="flex items-center justify-center gap-4 mb-12">
-    <span id="monthly-label" class="text-gray-300 font-medium">Monthly</span>
-    <label class="relative inline-flex items-center cursor-pointer">
-      <input type="checkbox" id="billing-toggle" class="sr-only peer">
-      <div class="w-14 h-7 bg-gray-700 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-green-800 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-green-600"></div>
-    </label>
-    <span id="yearly-label" class="text-gray-500 font-medium">Yearly</span>
-    <span class="ml-2 px-2 py-1 bg-green-500/20 text-green-400 text-xs font-semibold rounded-full">Save 20%</span>
-  </div>
+    <div class="mt-10 flex flex-wrap items-center justify-center gap-4">
+      <span id="monthly-label" class="text-gray-300 font-medium">Monthly</span>
+      <label class="relative inline-flex cursor-pointer items-center">
+        <input type="checkbox" id="billing-toggle" class="peer sr-only">
+        <div class="h-7 w-14 rounded-full bg-gray-700 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-green-800 peer peer-checked:bg-green-600 peer-checked:after:translate-x-full peer-checked:after:border-white after:absolute after:left-[2px] after:top-[2px] after:h-6 after:w-6 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-['']"></div>
+      </label>
+      <span id="yearly-label" class="text-gray-500 font-medium">Yearly</span>
+      <span class="rounded-full bg-green-500/20 px-3 py-1 text-xs font-semibold text-green-300">Save 20%</span>
+    </div>
 
-  <!-- Loading State -->
-  <div id="loading-state" class="flex justify-center items-center py-20">
-    <div class="animate-spin rounded-full h-12 w-12 border-4 border-green-500 border-t-transparent"></div>
-  </div>
+    <div id="loading-state" class="flex items-center justify-center py-20">
+      <div class="h-12 w-12 animate-spin rounded-full border-4 border-green-500 border-t-transparent"></div>
+    </div>
 
-  <!-- Pricing Cards -->
-  <div id="pricing-cards" class="hidden max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-    
-    <!-- Free Tier -->
-    <div class="relative bg-gray-800/50 backdrop-blur-sm rounded-3xl p-8 border border-gray-700 hover:border-gray-600 transition-all duration-300 hover:transform hover:scale-105">
-      <div class="flex justify-center mb-6">
-        <div class="w-16 h-16 bg-red-500/20 rounded-2xl flex items-center justify-center">
-          <svg class="w-8 h-8 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
-          </svg>
+    <div id="pricing-cards" class="hidden mx-auto mt-12 grid max-w-6xl grid-cols-1 gap-8 lg:grid-cols-3">
+      <div class="pricing-card rounded-[2rem] p-8 transition duration-300 hover:-translate-y-1 hover:border-slate-500/40">
+        <div class="mb-6 flex justify-center">
+          <div class="flex h-16 w-16 items-center justify-center rounded-2xl bg-red-500/20">
+            <svg class="h-8 w-8 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+            </svg>
+          </div>
         </div>
-      </div>
-      
-      <h3 class="text-2xl font-bold text-white text-center mb-2">Free</h3>
-      <p class="text-gray-400 text-center text-sm mb-6">Get started with the basics</p>
-      
-      <div class="text-center mb-8">
-        <span class="text-5xl font-bold text-white">$0</span>
-        <span class="text-gray-400">/forever</span>
-      </div>
-      
-      <ul class="space-y-4 mb-8">
-        <li class="flex items-center text-gray-300">
-          <svg class="w-5 h-5 text-green-400 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-          </svg>
-          Find Best Route (<span class="text-yellow-400 font-medium">4 per day</span>)
-        </li>
-        <li class="flex items-center text-gray-300">
-          <svg class="w-5 h-5 text-green-400 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-          </svg>
-          View traffic incidents
-        </li>
-        <li class="flex items-center text-gray-300">
-          <svg class="w-5 h-5 text-green-400 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-          </svg>
-          Browse local businesses
-        </li>
-        <li class="flex items-center text-gray-300">
-          <svg class="w-5 h-5 text-green-400 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-          </svg>
-          View community events
-        </li>
-        <li class="flex items-center text-gray-500">
-          <svg class="w-5 h-5 text-gray-600 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-          </svg>
-          <span class="line-through">Daily Routine Planner</span>
-        </li>
-        <li class="flex items-center text-gray-500">
-          <svg class="w-5 h-5 text-gray-600 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-          </svg>
-          <span class="line-through">Favorite Locations</span>
-        </li>
-        <li class="flex items-center text-gray-500">
-          <svg class="w-5 h-5 text-gray-600 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-          </svg>
-          <span class="line-through">Report Traffic Incidents</span>
-        </li>
-      </ul>
-      
-      <button id="free-btn" class="w-full py-3 px-6 rounded-xl bg-gray-700 text-gray-300 font-semibold transition-all duration-300 hover:bg-gray-600">
-        Current Plan
-      </button>
-    </div>
 
-    <!-- Plus Tier (Most Popular) -->
-    <div class="relative bg-gradient-to-b from-green-900/30 to-gray-800/50 backdrop-blur-sm rounded-3xl p-8 border-2 border-green-500/50 hover:border-green-400 transition-all duration-300 transform scale-105 shadow-2xl shadow-green-500/20">
-      <!-- Most Popular Badge -->
-      <div class="absolute -top-4 left-1/2 transform -translate-x-1/2">
-        <span class="px-4 py-1 bg-green-500 text-white text-sm font-bold rounded-full">MOST POPULAR</span>
-      </div>
-      
-      <div class="flex justify-center mb-6 mt-2">
-        <div class="w-16 h-16 bg-yellow-500/20 rounded-2xl flex items-center justify-center">
-          <svg class="w-8 h-8 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-          </svg>
+        <h3 class="pricing-card-title text-center text-2xl font-bold">Free</h3>
+        <p class="pricing-muted mt-2 text-center text-sm">Get started with the essentials</p>
+
+        <div class="mt-8 text-center">
+          <span class="text-5xl font-bold text-white">$0</span>
+          <span class="pricing-muted">/forever</span>
         </div>
-      </div>
-      
-      <h3 class="text-2xl font-bold text-white text-center mb-2">Plus</h3>
-      <p class="text-gray-400 text-center text-sm mb-6">For daily commuters</p>
-      
-      <div class="text-center mb-8">
-        <span id="plus-price" class="text-5xl font-bold text-white">$4.99</span>
-        <span id="plus-period" class="text-gray-400">/month</span>
-      </div>
-      
-      <ul class="space-y-4 mb-8">
-        <li class="flex items-center text-gray-300">
-          <svg class="w-5 h-5 text-green-400 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-          </svg>
-          Find Best Route (<span class="text-green-400 font-medium">50 routes/day</span>)
-        </li>
-        <li class="flex items-center text-gray-300">
-          <svg class="w-5 h-5 text-green-400 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-          </svg>
-          Daily Routine Planner
-        </li>
-        <li class="flex items-center text-gray-300">
-          <svg class="w-5 h-5 text-green-400 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-          </svg>
-          Save up to <span class="text-green-400 font-medium">10</span> Favorite Locations
-        </li>
-        <li class="flex items-center text-gray-300">
-          <svg class="w-5 h-5 text-green-400 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-          </svg>
-          Report Traffic Incidents
-        </li>
-        <li class="flex items-center text-gray-300">
-          <svg class="w-5 h-5 text-green-400 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-          </svg>
-          View traffic updates
-        </li>
-        <li class="flex items-center text-gray-300">
-          <svg class="w-5 h-5 text-green-400 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-          </svg>
-          Browse local businesses
-        </li>
-        <li class="flex items-center text-gray-500">
-          <svg class="w-5 h-5 text-gray-600 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-          </svg>
-          <span class="line-through">Unlimited routes & locations</span>
-        </li>
-      </ul>
-      
-      <button id="plus-btn" class="w-full py-3 px-6 rounded-xl bg-gradient-to-r from-green-500 to-green-600 text-white font-semibold transition-all duration-300 hover:from-green-600 hover:to-green-700 shadow-lg shadow-green-500/30 hover:shadow-green-500/50">
-        Upgrade to Plus
-      </button>
-    </div>
 
-    <!-- Pro Tier -->
-    <div class="relative bg-gray-800/50 backdrop-blur-sm rounded-3xl p-8 border border-gray-700 hover:border-purple-500/50 transition-all duration-300 hover:transform hover:scale-105">
-      <div class="flex justify-center mb-6">
-        <div class="w-16 h-16 bg-purple-500/20 rounded-2xl flex items-center justify-center">
-          <svg class="w-8 h-8 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
-          </svg>
+        <ul class="mt-8 space-y-4">
+          <li class="pricing-feature flex items-center">
+            <svg class="mr-3 h-5 w-5 flex-shrink-0 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+            Find Best Route (<span class="ml-1 font-medium text-yellow-300">4 per day</span>)
+          </li>
+          <li class="pricing-feature flex items-center">
+            <svg class="mr-3 h-5 w-5 flex-shrink-0 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+            View traffic incidents
+          </li>
+          <li class="pricing-feature flex items-center">
+            <svg class="mr-3 h-5 w-5 flex-shrink-0 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+            Browse local businesses
+          </li>
+          <li class="pricing-feature flex items-center">
+            <svg class="mr-3 h-5 w-5 flex-shrink-0 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+            View community events
+          </li>
+          <li class="flex items-center text-slate-500">
+            <svg class="mr-3 h-5 w-5 flex-shrink-0 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+            </svg>
+            <span class="line-through">Daily Routine Planner</span>
+          </li>
+          <li class="flex items-center text-slate-500">
+            <svg class="mr-3 h-5 w-5 flex-shrink-0 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+            </svg>
+            <span class="line-through">Favorite Locations</span>
+          </li>
+          <li class="flex items-center text-slate-500">
+            <svg class="mr-3 h-5 w-5 flex-shrink-0 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+            </svg>
+            <span class="line-through">Report Traffic Incidents</span>
+          </li>
+        </ul>
+
+        <button id="free-btn" class="mt-8 w-full rounded-2xl bg-gray-700 px-6 py-3 font-semibold text-gray-300 transition-all duration-300 hover:bg-gray-600">
+          Current Plan
+        </button>
+      </div>
+
+      <div class="pricing-card pricing-card-popular relative rounded-[2rem] p-8 transition duration-300 hover:-translate-y-1 hover:border-green-400/60">
+        <div class="absolute -top-4 left-1/2 -translate-x-1/2 transform">
+          <span class="rounded-full bg-green-500 px-4 py-1 text-sm font-bold text-white">MOST POPULAR</span>
         </div>
-      </div>
-      
-      <h3 class="text-2xl font-bold text-white text-center mb-2">Pro</h3>
-      <p class="text-gray-400 text-center text-sm mb-6">For power users</p>
-      
-      <div class="text-center mb-8">
-        <span id="pro-price" class="text-5xl font-bold text-white">$9.99</span>
-        <span id="pro-period" class="text-gray-400">/month</span>
-      </div>
-      
-      <ul class="space-y-4 mb-8">
-        <li class="flex items-center text-purple-300">
-          <svg class="w-5 h-5 text-purple-400 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-          </svg>
-          <span class="text-purple-400 font-medium">Everything in Plus</span>
-        </li>
-        <li class="flex items-center text-gray-300">
-          <svg class="w-5 h-5 text-green-400 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-          </svg>
-          <span class="text-green-400 font-medium">Unlimited</span> routes per day
-        </li>
-        <li class="flex items-center text-gray-300">
-          <svg class="w-5 h-5 text-green-400 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-          </svg>
-          <span class="text-green-400 font-medium">Unlimited</span> Favorite Locations
-        </li>
-        <li class="flex items-center text-gray-300">
-          <svg class="w-5 h-5 text-green-400 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-          </svg>
-          Daily Routine Planner
-        </li>
-        <li class="flex items-center text-gray-300">
-          <svg class="w-5 h-5 text-green-400 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-          </svg>
-          Report Traffic Incidents
-        </li>
-        <li class="flex items-center text-gray-300">
-          <svg class="w-5 h-5 text-green-400 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-          </svg>
-          All community features
-        </li>
-        <li class="flex items-center text-gray-300">
-          <svg class="w-5 h-5 text-green-400 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-          </svg>
-          Priority support
-        </li>
-      </ul>
-      
-      <button id="pro-btn" class="w-full py-3 px-6 rounded-xl bg-gradient-to-r from-purple-500 to-purple-600 text-white font-semibold transition-all duration-300 hover:from-purple-600 hover:to-purple-700 shadow-lg shadow-purple-500/30 hover:shadow-purple-500/50">
-        Upgrade to Pro
-      </button>
-    </div>
-  </div>
 
-  <!-- Current Subscription Info (shown when user has active subscription) -->
-  <div id="subscription-info" class="hidden max-w-2xl mx-auto mt-12 bg-gray-800/50 backdrop-blur-sm rounded-2xl p-6 border border-gray-700">
-    <h3 class="text-xl font-semibold text-white mb-4">Your Current Subscription</h3>
-    <div class="flex items-center justify-between">
-      <div>
-        <p class="text-gray-300">Plan: <span id="current-plan-name" class="text-green-400 font-semibold">Free</span></p>
-        <p class="text-gray-400 text-sm" id="billing-info"></p>
-      </div>
-      <button id="manage-subscription-btn" class="px-4 py-2 bg-gray-700 hover:bg-gray-600 text-white rounded-lg transition-colors">
-        Manage Subscription
-      </button>
-    </div>
-  </div>
+        <div class="mb-6 mt-2 flex justify-center">
+          <div class="flex h-16 w-16 items-center justify-center rounded-2xl bg-yellow-500/20">
+            <svg class="h-8 w-8 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+            </svg>
+          </div>
+        </div>
 
-  <!-- FAQ Section -->
-  <div class="max-w-3xl mx-auto mt-16">
-    <h2 class="text-2xl font-bold text-white text-center mb-8">Frequently Asked Questions</h2>
+        <h3 class="pricing-card-title text-center text-2xl font-bold">Plus</h3>
+        <p class="pricing-muted mt-2 text-center text-sm">For daily commuters</p>
+
+        <div class="mt-8 text-center">
+          <span id="plus-price" class="text-5xl font-bold text-white">$4.99</span>
+          <span id="plus-period" class="pricing-muted">/month</span>
+        </div>
+
+        <ul class="mt-8 space-y-4">
+          <li class="pricing-feature flex items-center">
+            <svg class="mr-3 h-5 w-5 flex-shrink-0 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+            Find Best Route (<span class="ml-1 font-medium text-green-300">50 routes/day</span>)
+          </li>
+          <li class="pricing-feature flex items-center">
+            <svg class="mr-3 h-5 w-5 flex-shrink-0 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+            Daily Routine Planner
+          </li>
+          <li class="pricing-feature flex items-center">
+            <svg class="mr-3 h-5 w-5 flex-shrink-0 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+            Save up to <span class="ml-1 font-medium text-green-300">10</span><span class="ml-1">Favorite Locations</span>
+          </li>
+          <li class="pricing-feature flex items-center">
+            <svg class="mr-3 h-5 w-5 flex-shrink-0 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+            Report Traffic Incidents
+          </li>
+          <li class="pricing-feature flex items-center">
+            <svg class="mr-3 h-5 w-5 flex-shrink-0 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+            View traffic updates
+          </li>
+          <li class="pricing-feature flex items-center">
+            <svg class="mr-3 h-5 w-5 flex-shrink-0 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+            Browse local businesses
+          </li>
+          <li class="flex items-center text-slate-500">
+            <svg class="mr-3 h-5 w-5 flex-shrink-0 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+            </svg>
+            <span class="line-through">Unlimited routes & locations</span>
+          </li>
+        </ul>
+
+        <button id="plus-btn" class="mt-8 w-full rounded-2xl bg-gradient-to-r from-green-500 to-green-600 px-6 py-3 font-semibold text-white shadow-lg shadow-green-500/30 transition-all duration-300 hover:from-green-600 hover:to-green-700 hover:shadow-green-500/50">
+          Upgrade to Plus
+        </button>
+      </div>
+
+      <div class="pricing-card rounded-[2rem] p-8 transition duration-300 hover:-translate-y-1 hover:border-purple-400/40">
+        <div class="mb-6 flex justify-center">
+          <div class="flex h-16 w-16 items-center justify-center rounded-2xl bg-purple-500/20">
+            <svg class="h-8 w-8 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+            </svg>
+          </div>
+        </div>
+
+        <h3 class="pricing-card-title text-center text-2xl font-bold">Pro</h3>
+        <p class="pricing-muted mt-2 text-center text-sm">For power users</p>
+
+        <div class="mt-8 text-center">
+          <span id="pro-price" class="text-5xl font-bold text-white">$9.99</span>
+          <span id="pro-period" class="pricing-muted">/month</span>
+        </div>
+
+        <ul class="mt-8 space-y-4">
+          <li class="pricing-feature flex items-center text-purple-300">
+            <svg class="mr-3 h-5 w-5 flex-shrink-0 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+            <span class="font-medium text-purple-300">Everything in Plus</span>
+          </li>
+          <li class="pricing-feature flex items-center">
+            <svg class="mr-3 h-5 w-5 flex-shrink-0 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+            <span class="font-medium text-green-300">Unlimited</span><span class="ml-1">routes per day</span>
+          </li>
+          <li class="pricing-feature flex items-center">
+            <svg class="mr-3 h-5 w-5 flex-shrink-0 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+            <span class="font-medium text-green-300">Unlimited</span><span class="ml-1">Favorite Locations</span>
+          </li>
+          <li class="pricing-feature flex items-center">
+            <svg class="mr-3 h-5 w-5 flex-shrink-0 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+            Daily Routine Planner
+          </li>
+          <li class="pricing-feature flex items-center">
+            <svg class="mr-3 h-5 w-5 flex-shrink-0 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+            Report Traffic Incidents
+          </li>
+          <li class="pricing-feature flex items-center">
+            <svg class="mr-3 h-5 w-5 flex-shrink-0 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+            All community features
+          </li>
+          <li class="pricing-feature flex items-center">
+            <svg class="mr-3 h-5 w-5 flex-shrink-0 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+            Priority support
+          </li>
+        </ul>
+
+        <button id="pro-btn" class="mt-8 w-full rounded-2xl bg-gradient-to-r from-purple-500 to-purple-600 px-6 py-3 font-semibold text-white shadow-lg shadow-purple-500/30 transition-all duration-300 hover:from-purple-600 hover:to-purple-700 hover:shadow-purple-500/50">
+          Upgrade to Pro
+        </button>
+      </div>
+    </div>
+
+    <div id="subscription-info" class="hidden mx-auto mt-12 max-w-2xl rounded-[1.75rem] border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
+      <h3 class="subscription-title text-xl font-semibold">Your Current Subscription</h3>
+      <div class="mt-4 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <div>
+          <p class="pricing-subscription-copy">Plan: <span id="current-plan-name" class="font-semibold text-green-300">Free</span></p>
+          <p class="pricing-muted text-sm" id="billing-info"></p>
+        </div>
+        <button id="manage-subscription-btn" class="rounded-xl bg-gray-700 px-4 py-2 text-white transition-colors hover:bg-gray-600">
+          Manage Subscription
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-3xl">
+    <h2 class="pricing-faq-title mb-8 text-center text-3xl font-bold">Frequently Asked Questions</h2>
     <div class="space-y-4">
-      <details class="bg-gray-800/50 backdrop-blur-sm rounded-xl border border-gray-700 p-4 cursor-pointer">
-        <summary class="text-white font-semibold">Can I cancel my subscription anytime?</summary>
-        <p class="text-gray-400 mt-3">Yes! You can cancel your subscription at any time. You'll continue to have access to your plan until the end of your billing period.</p>
+      <details class="pricing-faq-card cursor-pointer rounded-2xl p-5">
+        <summary class="font-semibold">Can I cancel my subscription anytime?</summary>
+        <p class="pricing-faq-copy mt-3">Yes. You can cancel at any time and keep access through the end of the current billing period.</p>
       </details>
-      <details class="bg-gray-800/50 backdrop-blur-sm rounded-xl border border-gray-700 p-4 cursor-pointer">
-        <summary class="text-white font-semibold">How does billing work?</summary>
-        <p class="text-gray-400 mt-3">You'll be charged at the start of each billing period (monthly or yearly). If you choose yearly billing, you'll save 20% compared to monthly billing.</p>
+      <details class="pricing-faq-card cursor-pointer rounded-2xl p-5">
+        <summary class="font-semibold">How does billing work?</summary>
+        <p class="pricing-faq-copy mt-3">You are charged at the start of each billing period. Choosing yearly billing keeps the same features and reduces the effective monthly cost.</p>
       </details>
-      <details class="bg-gray-800/50 backdrop-blur-sm rounded-xl border border-gray-700 p-4 cursor-pointer">
-        <summary class="text-white font-semibold">What payment methods do you accept?</summary>
-        <p class="text-gray-400 mt-3">We accept <strong class="text-blue-400">PayPal</strong> (credit/debit card or PayPal balance) for instant activation, or <strong class="text-purple-400">Zelle</strong> bank transfers for those who prefer no processing fees. PayPal payments activate your subscription immediately, while Zelle payments are verified within 24 hours.</p>
+      <details class="pricing-faq-card cursor-pointer rounded-2xl p-5">
+        <summary class="font-semibold">What payment methods do you accept?</summary>
+        <p class="pricing-faq-copy mt-3">We accept <strong class="text-blue-300">PayPal</strong> for instant activation and <strong class="text-purple-300">Zelle</strong> for bank transfers verified within 24 hours.</p>
       </details>
-      <details class="bg-gray-800/50 backdrop-blur-sm rounded-xl border border-gray-700 p-4 cursor-pointer">
-        <summary class="text-white font-semibold">Can I upgrade or downgrade my plan?</summary>
-        <p class="text-gray-400 mt-3">Absolutely! You can change your plan at any time. If you upgrade, you'll be charged the prorated difference. If you downgrade, your new plan will start at the next billing cycle.</p>
+      <details class="pricing-faq-card cursor-pointer rounded-2xl p-5">
+        <summary class="font-semibold">Can I upgrade or downgrade my plan?</summary>
+        <p class="pricing-faq-copy mt-3">Yes. Upgrades apply immediately through checkout, and downgrades take effect at the next billing cycle.</p>
       </details>
     </div>
-  </div>
+  </section>
 </div>
 
-<!-- Login Required Modal -->
-<div id="login-modal" class="hidden fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50">
-  <div class="bg-gray-800 rounded-2xl p-8 max-w-md mx-4 border border-gray-700">
+<div id="login-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/70 backdrop-blur-sm">
+  <div class="pricing-modal-card mx-4 w-full max-w-md rounded-[1.75rem] p-8">
     <div class="text-center">
-      <div class="w-16 h-16 bg-yellow-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
-        <svg class="w-8 h-8 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <div class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-yellow-500/20">
+        <svg class="h-8 w-8 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
         </svg>
       </div>
-      <h3 class="text-xl font-bold text-white mb-2">Login Required</h3>
-      <p class="text-gray-400 mb-6">Please log in to upgrade your plan.</p>
+      <h3 class="subscription-title text-xl font-bold">Login Required</h3>
+      <p class="pricing-muted mt-2 mb-6">Please log in before changing subscription plans.</p>
       <div class="flex gap-4">
-        <button id="modal-close-btn" class="flex-1 py-2 px-4 bg-gray-700 hover:bg-gray-600 text-white rounded-lg transition-colors">
+        <button id="modal-close-btn" class="flex-1 rounded-xl bg-gray-700 px-4 py-2 text-white transition-colors hover:bg-gray-600">
           Cancel
         </button>
-        <a href="{{site.baseurl}}/login" class="flex-1 py-2 px-4 bg-green-500 hover:bg-green-600 text-white rounded-lg transition-colors text-center">
+        <a href="{{site.baseurl}}/login" class="flex-1 rounded-xl bg-green-500 px-4 py-2 text-center text-white transition-colors hover:bg-green-600">
           Login
         </a>
       </div>
