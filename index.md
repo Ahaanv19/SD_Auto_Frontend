@@ -35,9 +35,7 @@ menu: nav/home.html
 
   <!-- Preconnect for Performance -->
   <link rel="preconnect" href="https://unpkg.com">
-  <link rel="preconnect" href="https://assets10.lottiefiles.com">
   <link rel="dns-prefetch" href="https://unpkg.com">
-  <link rel="dns-prefetch" href="https://assets10.lottiefiles.com">
 
   <!-- External Stylesheets -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
@@ -63,10 +61,209 @@ menu: nav/home.html
       -webkit-backdrop-filter: blur(20px);
     }
 
-    lottie-player {
+    .hero-route-shell {
+      position: relative;
+      isolation: isolate;
+    }
+
+    .hero-route-panel {
+      position: relative;
+      padding: 1rem;
+      border-radius: 2rem;
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(226, 244, 255, 0.72));
+      box-shadow: 0 32px 68px -36px rgba(8, 26, 46, 0.45);
+      backdrop-filter: blur(16px);
+    }
+
+    .dark .hero-route-panel {
+      background: linear-gradient(145deg, rgba(9, 18, 32, 0.94), rgba(12, 24, 41, 0.88));
+      border-color: rgba(148, 163, 184, 0.16);
+    }
+
+    .hero-route-display {
+      position: relative;
+      min-height: 420px;
+      overflow: hidden;
+      border-radius: 1.6rem;
+      border: 1px solid rgba(148, 163, 184, 0.16);
+      background: linear-gradient(160deg, rgba(8, 47, 73, 0.95), rgba(15, 23, 42, 0.98));
+    }
+
+    .hero-route-display::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(148, 163, 184, 0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(148, 163, 184, 0.08) 1px, transparent 1px);
+      background-size: 38px 38px;
+      opacity: 0.5;
+    }
+
+    .hero-route-display::after {
+      content: '';
+      position: absolute;
+      inset: -20% -10%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+      transform: translateX(-140%);
+      animation: scanSweep 8s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+    }
+
+    .hero-route-metric {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      z-index: 2;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.55rem 0.85rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.38);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #e2e8f0;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      backdrop-filter: blur(10px);
+    }
+
+    .hero-route-metric span {
+      width: 0.55rem;
+      height: 0.55rem;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 0 0.35rem rgba(34, 197, 94, 0.12);
+    }
+
+    .hero-route-svg {
+      position: absolute;
+      inset: 0;
       width: 100%;
-      height: 400px;
-      filter: drop-shadow(0 25px 50px rgba(0, 102, 204, 0.2));
+      height: 100%;
+    }
+
+    .hero-callout {
+      position: absolute;
+      z-index: 2;
+      min-width: 11rem;
+      max-width: 12.5rem;
+      padding: 0.9rem 1rem;
+      border-radius: 1rem;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      background: rgba(255, 255, 255, 0.12);
+      box-shadow: 0 20px 38px -28px rgba(15, 23, 42, 0.86);
+      backdrop-filter: blur(16px);
+      animation: calloutFloat 7s ease-in-out infinite;
+    }
+
+    .hero-callout strong {
+      display: block;
+      color: white;
+      font-size: 0.92rem;
+      line-height: 1.35;
+    }
+
+    .hero-callout span {
+      display: block;
+      margin-top: 0.35rem;
+      color: rgba(226, 232, 240, 0.9);
+      font-size: 0.78rem;
+      line-height: 1.45;
+    }
+
+    .hero-callout--primary {
+      top: 1.15rem;
+      right: 1.1rem;
+      animation-delay: -1.4s;
+    }
+
+    .hero-callout--secondary {
+      left: 1.2rem;
+      bottom: 5.8rem;
+      animation-delay: -3s;
+    }
+
+    .hero-callout--tertiary {
+      right: 1.2rem;
+      bottom: 6.4rem;
+      animation-delay: -4.4s;
+    }
+
+    .hero-pulse {
+      position: absolute;
+      z-index: 2;
+      width: 0.95rem;
+      height: 0.95rem;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.45);
+      animation: pulseRing 3.6s ease-out infinite;
+    }
+
+    .hero-pulse--start {
+      left: 4.2rem;
+      bottom: 5.2rem;
+    }
+
+    .hero-pulse--mid {
+      left: 12.6rem;
+      top: 12.5rem;
+      animation-delay: -1.2s;
+    }
+
+    .hero-pulse--end {
+      right: 3.7rem;
+      top: 5.8rem;
+      animation-delay: -2.3s;
+    }
+
+    .hero-status-strip {
+      position: absolute;
+      left: 1rem;
+      right: 1rem;
+      bottom: 1rem;
+      z-index: 2;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+
+    .hero-status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.65rem 0.85rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.46);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #e2e8f0;
+      font-size: 0.8rem;
+      font-weight: 600;
+      backdrop-filter: blur(10px);
+    }
+
+    @keyframes routeFlow {
+      from { stroke-dashoffset: 190; }
+      to { stroke-dashoffset: 0; }
+    }
+
+    @keyframes scanSweep {
+      from { transform: translateX(-140%); }
+      to { transform: translateX(140%); }
+    }
+
+    @keyframes calloutFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+
+    @keyframes pulseRing {
+      0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.42); }
+      70% { box-shadow: 0 0 0 18px rgba(34, 197, 94, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
     }
 
     /* Stats counter animation */
@@ -86,7 +283,7 @@ menu: nav/home.html
 
     /* Feature icon hover */
     .feature-icon {
-      transition: all 0.3s ease;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
     .feature-card:hover .feature-icon {
@@ -97,7 +294,7 @@ menu: nav/home.html
     .reveal {
       opacity: 0;
       transform: translateY(30px);
-      transition: all 0.8s ease;
+      transition: opacity 0.8s ease, transform 0.8s ease;
     }
 
     .reveal.active {
@@ -159,7 +356,7 @@ menu: nav/home.html
       height: 2px;
       background: #374151;
       border-radius: 2px;
-      transition: all 0.3s ease;
+      transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease;
     }
 
     .dark .mobile-nav-toggle span {
@@ -224,7 +421,7 @@ menu: nav/home.html
       color: #374151;
       text-decoration: none;
       font-weight: 500;
-      transition: all 0.2s ease;
+      transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
     }
 
     .dark .mobile-nav-menu a {
@@ -250,7 +447,7 @@ menu: nav/home.html
     .faq-item {
       border-radius: 16px;
       overflow: hidden;
-      transition: all 0.3s ease;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
     .faq-item:hover {
@@ -270,7 +467,7 @@ menu: nav/home.html
       text-align: left;
       font-weight: 600;
       color: #1f2937;
-      transition: all 0.3s ease;
+      transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
     }
 
     .dark .faq-question {
@@ -327,16 +524,44 @@ menu: nav/home.html
       color: #9ca3af;
     }
 
-    /* Testimonial Styles */
-    .testimonial-card {
-      position: relative;
-      overflow: hidden;
+    @media (max-width: 768px) {
+      .hero-route-display {
+        min-height: 360px;
+      }
+
+      .hero-callout {
+        min-width: 0;
+        max-width: 11rem;
+      }
+
+      .hero-callout--primary {
+        top: 0.85rem;
+        right: 0.85rem;
+      }
+
+      .hero-callout--secondary {
+        left: 0.85rem;
+        bottom: 5.9rem;
+      }
+
+      .hero-callout--tertiary {
+        right: 0.85rem;
+        bottom: 6.1rem;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero-route-display::after,
+      .hero-callout,
+      .hero-pulse,
+      .stat-item {
+        animation: none;
+      }
     }
   </style>
 
   <!-- External Scripts -->
   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js" defer></script>
 </head>
 
 <body>
@@ -394,28 +619,23 @@ menu: nav/home.html
     <section class="relative hero-gradient py-16 lg:py-24">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16">
-          
-          <!-- Text Content -->
+
           <div class="flex-1 text-center lg:text-left space-y-8 animate-fade-in">
-            <!-- Badge -->
             <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 text-sm font-medium">
-              <span class="w-2 h-2 rounded-full bg-primary-500 animate-pulse"></span>
-              Official City of San Diego Initiative
+              <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              Live route intelligence for San Diego
             </div>
 
-            <!-- Main Heading -->
             <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight">
-              <span class="text-slate-900 dark:text-white">Navigate Smarter with</span>
+              <span class="text-slate-900 dark:text-white">Make route decisions before</span>
               <br>
-              <span class="gradient-text">SD Auto</span>
+              <span class="gradient-text">you leave the driveway</span>
             </h1>
 
-            <!-- Description -->
             <p class="text-lg sm:text-xl text-slate-600 dark:text-slate-300 max-w-xl mx-auto lg:mx-0 leading-relaxed">
-              Real-time traffic intelligence, optimized routing, and smart navigation designed for San Diego's streets. Built for efficiency, driven by data.
+              SD Auto combines live traffic density, hazard awareness, and route-aware local business context in one calmer planning surface built for San Diego streets.
             </p>
 
-            <!-- CTA Buttons -->
             <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
               <a href="{{site.baseurl}}/route/" class="group inline-flex items-center justify-center gap-2 px-8 py-4 btn-primary text-white rounded-2xl font-semibold text-base shadow-large">
                 <span>Find Best Route</span>
@@ -423,7 +643,7 @@ menu: nav/home.html
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
               </a>
-              <a href="{{site.baseurl}}/Readme4yml/" class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border-2 border-slate-200 dark:border-slate-700 hover:border-primary-500 dark:hover:border-primary-500 rounded-2xl font-semibold text-base transition-all hover:shadow-medium">
+              <a href="{{site.baseurl}}/Readme4yml/" class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border-2 border-slate-200 dark:border-slate-700 hover:border-primary-500 dark:hover:border-primary-500 rounded-2xl font-semibold text-base transition duration-300 ease-out hover:shadow-medium">
                 <span>Learn More</span>
                 <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -431,32 +651,64 @@ menu: nav/home.html
               </a>
             </div>
 
-            <!-- Trust Indicators -->
-            <div class="flex items-center gap-6 justify-center lg:justify-start pt-4">
-              <div class="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
-                <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                </svg>
-                <span>Real-time Data</span>
+            <div class="grid gap-3 sm:grid-cols-3 max-w-2xl mx-auto lg:mx-0 pt-2 text-left">
+              <div class="rounded-2xl border border-slate-200/70 dark:border-slate-700/70 bg-white/70 dark:bg-slate-800/70 px-4 py-3 shadow-soft">
+                <p class="text-xs font-semibold uppercase tracking-[0.18em] text-primary-600 dark:text-primary-300">Traffic scan</p>
+                <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">Sensor-driven reroutes stay visible before you commit to a turn.</p>
               </div>
-              <div class="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
-                <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                </svg>
-                <span>Optimized for San Diego</span>
+              <div class="rounded-2xl border border-slate-200/70 dark:border-slate-700/70 bg-white/70 dark:bg-slate-800/70 px-4 py-3 shadow-soft">
+                <p class="text-xs font-semibold uppercase tracking-[0.18em] text-emerald-600 dark:text-emerald-300">Hazard watch</p>
+                <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">Reported incidents stay in context while the map recalculates cleaner options.</p>
+              </div>
+              <div class="rounded-2xl border border-slate-200/70 dark:border-slate-700/70 bg-white/70 dark:bg-slate-800/70 px-4 py-3 shadow-soft">
+                <p class="text-xs font-semibold uppercase tracking-[0.18em] text-secondary-600 dark:text-secondary-300">Local stops</p>
+                <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">Spotlighted businesses travel with the same routing flow instead of living on a separate page.</p>
               </div>
             </div>
           </div>
 
-          <!-- Lottie Animation -->
-          <div class="flex-1 w-full max-w-lg lg:max-w-xl animate-slide-up">
-            <lottie-player
-              src="https://assets10.lottiefiles.com/packages/lf20_kyu7xb1v.json"
-              background="transparent"
-              speed="1"
-              loop
-              autoplay>
-            </lottie-player>
+          <div class="flex-1 w-full max-w-lg lg:max-w-xl animate-slide-up hero-route-shell">
+            <div class="hero-route-panel">
+              <div class="hero-route-display">
+                <div class="hero-route-metric"><span></span> AI route assistant</div>
+
+                <svg class="hero-route-svg" viewBox="0 0 560 420" fill="none" aria-hidden="true">
+                  <defs>
+                    <linearGradient id="routeGlow" x1="70" y1="320" x2="492" y2="120" gradientUnits="userSpaceOnUse">
+                      <stop offset="0" stop-color="#22c55e" />
+                      <stop offset="0.55" stop-color="#38bdf8" />
+                      <stop offset="1" stop-color="#fbbf24" />
+                    </linearGradient>
+                  </defs>
+                  <path d="M70 312C120 288 149 227 210 204C268 182 305 230 348 219C392 207 419 142 492 120" stroke="rgba(148, 163, 184, 0.22)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" />
+                  <path d="M102 102C148 128 178 157 226 150C276 143 303 98 352 99C403 100 436 138 483 178" stroke="rgba(148, 163, 184, 0.12)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="10 14" />
+                  <path d="M70 312C120 288 149 227 210 204C268 182 305 230 348 219C392 207 419 142 492 120" stroke="url(#routeGlow)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="18 16" style="animation: routeFlow 8s linear infinite;" />
+                </svg>
+
+                <div class="hero-pulse hero-pulse--start"></div>
+                <div class="hero-pulse hero-pulse--mid"></div>
+                <div class="hero-pulse hero-pulse--end"></div>
+
+                <div class="hero-callout hero-callout--primary">
+                  <strong>Traffic density eased</strong>
+                  <span>Downtown congestion is softening, so the faster branch is surfacing again.</span>
+                </div>
+                <div class="hero-callout hero-callout--secondary">
+                  <strong>Hazard watch</strong>
+                  <span>Active reports stay visible before a turn locks in and the route commits.</span>
+                </div>
+                <div class="hero-callout hero-callout--tertiary">
+                  <strong>Local stop ready</strong>
+                  <span>Spotlighted businesses remain attached to the same planning flow.</span>
+                </div>
+
+                <div class="hero-status-strip">
+                  <div class="hero-status-pill">4 live traffic segments</div>
+                  <div class="hero-status-pill">1 lower-risk alternate</div>
+                  <div class="hero-status-pill">3 spotlighted stops</div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -466,7 +718,7 @@ menu: nav/home.html
     <section class="py-8 px-4 sm:px-6 lg:px-8">
       <div class="max-w-7xl mx-auto">
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
-          <a href="{{site.baseurl}}/route/" class="feature-card group flex flex-col items-center gap-3 p-6 bg-white/70 dark:bg-slate-800/70 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-primary-500 dark:hover:border-primary-500 transition-all hover:shadow-medium">
+          <a href="{{site.baseurl}}/route/" class="feature-card group flex flex-col items-center gap-3 p-6 bg-white/70 dark:bg-slate-800/70 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-primary-500 dark:hover:border-primary-500 transition duration-300 ease-out hover:shadow-medium">
             <div class="feature-icon w-14 h-14 rounded-2xl bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center text-white shadow-lg">
               <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
@@ -474,7 +726,7 @@ menu: nav/home.html
             </div>
             <span class="font-semibold text-slate-700 dark:text-slate-200 text-center">Find Best Route</span>
           </a>
-          <a href="{{site.baseurl}}/routine/" class="feature-card group flex flex-col items-center gap-3 p-6 bg-white/70 dark:bg-slate-800/70 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-accent-500 dark:hover:border-accent-500 transition-all hover:shadow-medium">
+          <a href="{{site.baseurl}}/routine/" class="feature-card group flex flex-col items-center gap-3 p-6 bg-white/70 dark:bg-slate-800/70 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-accent-500 dark:hover:border-accent-500 transition duration-300 ease-out hover:shadow-medium">
             <div class="feature-icon w-14 h-14 rounded-2xl bg-gradient-to-br from-accent-500 to-accent-600 flex items-center justify-center text-white shadow-lg">
               <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -482,7 +734,7 @@ menu: nav/home.html
             </div>
             <span class="font-semibold text-slate-700 dark:text-slate-200 text-center">Daily Routine</span>
           </a>
-          <a href="{{site.baseurl}}/hazard/" class="feature-card group flex flex-col items-center gap-3 p-6 bg-white/70 dark:bg-slate-800/70 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-warning dark:hover:border-warning transition-all hover:shadow-medium">
+          <a href="{{site.baseurl}}/hazard/" class="feature-card group flex flex-col items-center gap-3 p-6 bg-white/70 dark:bg-slate-800/70 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-warning dark:hover:border-warning transition duration-300 ease-out hover:shadow-medium">
             <div class="feature-icon w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center text-white shadow-lg">
               <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
@@ -490,7 +742,7 @@ menu: nav/home.html
             </div>
             <span class="font-semibold text-slate-700 dark:text-slate-200 text-center">Report Hazard</span>
           </a>
-          <a href="{{site.baseurl}}/localbusinesses/" class="feature-card group flex flex-col items-center gap-3 p-6 bg-white/70 dark:bg-slate-800/70 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-success dark:hover:border-success transition-all hover:shadow-medium">
+          <a href="{{site.baseurl}}/localbusinesses/" class="feature-card group flex flex-col items-center gap-3 p-6 bg-white/70 dark:bg-slate-800/70 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-success dark:hover:border-success transition duration-300 ease-out hover:shadow-medium">
             <div class="feature-icon w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500 to-green-600 flex items-center justify-center text-white shadow-lg">
               <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
@@ -678,94 +930,6 @@ menu: nav/home.html
       </div>
     </section>
 
-    <!-- Testimonials Section -->
-    <section class="py-16 lg:py-24 bg-gradient-to-b from-transparent via-primary-50/30 to-transparent dark:via-primary-900/5">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-16">
-          <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 text-sm font-medium mb-4">
-            What Users Say
-          </span>
-          <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-4">
-            Trusted by San Diego Commuters
-          </h2>
-          <p class="text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
-            Join thousands of San Diegans who navigate smarter every day
-          </p>
-        </div>
-
-        <div class="grid md:grid-cols-3 gap-8">
-          <!-- Testimonial 1 -->
-          <div class="testimonial-card bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-soft border border-slate-100 dark:border-slate-700">
-            <div class="flex items-center gap-1 mb-4">
-              <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-              <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-              <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-              <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-              <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-            </div>
-            <p class="text-slate-600 dark:text-slate-300 mb-6 leading-relaxed">
-              "SD Auto has completely changed my daily commute from La Jolla to Downtown. I save at least 20 minutes every day by avoiding traffic hotspots!"
-            </p>
-            <div class="flex items-center gap-3">
-              <div class="w-12 h-12 rounded-full bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center text-white font-bold">
-                MR
-              </div>
-              <div>
-                <p class="font-semibold text-slate-900 dark:text-white">Maria R.</p>
-                <p class="text-sm text-slate-500 dark:text-slate-400">La Jolla Resident</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Testimonial 2 -->
-          <div class="testimonial-card bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-soft border border-slate-100 dark:border-slate-700">
-            <div class="flex items-center gap-1 mb-4">
-              <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-              <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-              <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-              <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-              <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-            </div>
-            <p class="text-slate-600 dark:text-slate-300 mb-6 leading-relaxed">
-              "The daily routine planner is a game-changer! I can plan my entire day with multiple stops and it optimizes everything automatically."
-            </p>
-            <div class="flex items-center gap-3">
-              <div class="w-12 h-12 rounded-full bg-gradient-to-br from-emerald-500 to-green-600 flex items-center justify-center text-white font-bold">
-                JT
-              </div>
-              <div>
-                <p class="font-semibold text-slate-900 dark:text-white">James T.</p>
-                <p class="text-sm text-slate-500 dark:text-slate-400">Small Business Owner</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Testimonial 3 -->
-          <div class="testimonial-card bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-soft border border-slate-100 dark:border-slate-700">
-            <div class="flex items-center gap-1 mb-4">
-              <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-              <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-              <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-              <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-              <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-            </div>
-            <p class="text-slate-600 dark:text-slate-300 mb-6 leading-relaxed">
-              "As a delivery driver, SD Auto Pro is essential. Unlimited routes and the hazard alerts keep me efficient and safe on the road."
-            </p>
-            <div class="flex items-center gap-3">
-              <div class="w-12 h-12 rounded-full bg-gradient-to-br from-purple-500 to-violet-600 flex items-center justify-center text-white font-bold">
-                SK
-              </div>
-              <div>
-                <p class="font-semibold text-slate-900 dark:text-white">Sarah K.</p>
-                <p class="text-sm text-slate-500 dark:text-slate-400">Delivery Professional</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- FAQ Section -->
     <section class="py-16 lg:py-24">
       <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -884,7 +1048,7 @@ menu: nav/home.html
               Join thousands of San Diegans using SD Auto for their daily commute. Start optimizing your routes today.
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href="{{site.baseurl}}/login" class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-primary-700 rounded-2xl font-bold text-base shadow-lg hover:shadow-xl hover:scale-105 transition-all">
+              <a href="{{site.baseurl}}/login" class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-primary-700 rounded-2xl font-bold text-base shadow-lg hover:shadow-xl hover:scale-105 transition duration-300 ease-out">
                 <span>Get Started Free</span>
                 <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
