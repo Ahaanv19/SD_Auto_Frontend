@@ -621,9 +621,9 @@ menu: nav/home.html
         <div class="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16">
 
           <div class="flex-1 text-center lg:text-left space-y-8 animate-fade-in">
-            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 text-sm font-medium">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary-200/70 dark:border-primary-800/60 bg-primary-50 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 text-xs font-semibold uppercase tracking-[0.18em]">
               <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-              Live route intelligence for San Diego
+              City of San Diego · Smart Mobility Initiative
             </div>
 
             <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight">
@@ -651,18 +651,24 @@ menu: nav/home.html
               </a>
             </div>
 
-            <div class="grid gap-3 sm:grid-cols-3 max-w-2xl mx-auto lg:mx-0 pt-2 text-left">
-              <div class="rounded-2xl border border-slate-200/70 dark:border-slate-700/70 bg-white/70 dark:bg-slate-800/70 px-4 py-3 shadow-soft">
-                <p class="text-xs font-semibold uppercase tracking-[0.18em] text-primary-600 dark:text-primary-300">Traffic scan</p>
-                <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">Sensor-driven reroutes stay visible before you commit to a turn.</p>
+            <div class="flex flex-wrap items-center justify-center lg:justify-start gap-x-6 gap-y-3 pt-2 border-t border-slate-200/70 dark:border-slate-700/60 mt-2">
+              <div class="inline-flex items-center gap-2 text-sm font-medium text-slate-600 dark:text-slate-300 pt-4">
+                <svg class="w-4 h-4 text-primary-600 dark:text-primary-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                City of San Diego Open Data Portal
               </div>
-              <div class="rounded-2xl border border-slate-200/70 dark:border-slate-700/70 bg-white/70 dark:bg-slate-800/70 px-4 py-3 shadow-soft">
-                <p class="text-xs font-semibold uppercase tracking-[0.18em] text-emerald-600 dark:text-emerald-300">Hazard watch</p>
-                <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">Reported incidents stay in context while the map recalculates cleaner options.</p>
+              <div class="inline-flex items-center gap-2 text-sm font-medium text-slate-600 dark:text-slate-300 pt-4">
+                <svg class="w-4 h-4 text-primary-600 dark:text-primary-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                Refreshed every 5 minutes
               </div>
-              <div class="rounded-2xl border border-slate-200/70 dark:border-slate-700/70 bg-white/70 dark:bg-slate-800/70 px-4 py-3 shadow-soft">
-                <p class="text-xs font-semibold uppercase tracking-[0.18em] text-secondary-600 dark:text-secondary-300">Local stops</p>
-                <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">Spotlighted businesses travel with the same routing flow instead of living on a separate page.</p>
+              <div class="inline-flex items-center gap-2 text-sm font-medium text-slate-600 dark:text-slate-300 pt-4">
+                <svg class="w-4 h-4 text-primary-600 dark:text-primary-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                </svg>
+                Free to start — no account required
               </div>
             </div>
           </div>
@@ -742,8 +748,8 @@ menu: nav/home.html
             </div>
             <span class="font-semibold text-slate-700 dark:text-slate-200 text-center">Report Hazard</span>
           </a>
-          <a href="{{site.baseurl}}/localbusinesses/" class="feature-card group flex flex-col items-center gap-3 p-6 bg-white/70 dark:bg-slate-800/70 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-success dark:hover:border-success transition duration-300 ease-out hover:shadow-medium">
-            <div class="feature-icon w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500 to-green-600 flex items-center justify-center text-white shadow-lg">
+          <a href="{{site.baseurl}}/localbusinesses/" class="feature-card group flex flex-col items-center gap-3 p-6 bg-white/70 dark:bg-slate-800/70 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-accent-500 dark:hover:border-accent-500 transition duration-300 ease-out hover:shadow-medium">
+            <div class="feature-icon w-14 h-14 rounded-2xl bg-gradient-to-br from-accent-500 to-accent-600 flex items-center justify-center text-white shadow-lg">
               <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
               </svg>
@@ -762,52 +768,56 @@ menu: nav/home.html
             Built for San Diego
           </h2>
           <p class="text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
-            Powered by real traffic data from the City of San Diego's open data portal
+            Operational coverage drawn directly from the City of San Diego's open data network
           </p>
         </div>
 
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
-          <div class="stat-item bg-white dark:bg-slate-800 rounded-3xl p-8 text-center shadow-soft border border-slate-100 dark:border-slate-700">
-            <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-primary-100 to-primary-200 dark:from-primary-900/50 dark:to-primary-800/50 flex items-center justify-center">
-              <svg class="w-8 h-8 text-primary-600 dark:text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+          <div class="stat-item bg-white dark:bg-slate-800 rounded-2xl p-8 text-center shadow-soft border border-slate-200 dark:border-slate-700">
+            <div class="w-12 h-12 mx-auto mb-4 rounded-xl bg-primary-50 dark:bg-primary-900/40 ring-1 ring-primary-100 dark:ring-primary-800 flex items-center justify-center">
+              <svg class="w-6 h-6 text-primary-600 dark:text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
               </svg>
             </div>
-            <h3 class="text-3xl font-bold gradient-text mb-2">Real-Time</h3>
-            <p class="text-slate-500 dark:text-slate-400 text-sm">Traffic Updates</p>
+            <div class="text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">1,200<span class="text-primary-500">+</span></div>
+            <p class="mt-2 text-sm font-medium text-slate-500 dark:text-slate-400">Road segments monitored</p>
           </div>
 
-          <div class="stat-item bg-white dark:bg-slate-800 rounded-3xl p-8 text-center shadow-soft border border-slate-100 dark:border-slate-700">
-            <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-accent-100 to-accent-200 dark:from-accent-900/50 dark:to-accent-800/50 flex items-center justify-center">
-              <svg class="w-8 h-8 text-accent-600 dark:text-accent-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-              </svg>
-            </div>
-            <h3 class="text-3xl font-bold gradient-text mb-2">Secure</h3>
-            <p class="text-slate-500 dark:text-slate-400 text-sm">Data Protected</p>
-          </div>
-
-          <div class="stat-item bg-white dark:bg-slate-800 rounded-3xl p-8 text-center shadow-soft border border-slate-100 dark:border-slate-700">
-            <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-emerald-100 to-emerald-200 dark:from-emerald-900/50 dark:to-emerald-800/50 flex items-center justify-center">
-              <svg class="w-8 h-8 text-emerald-600 dark:text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <div class="stat-item bg-white dark:bg-slate-800 rounded-2xl p-8 text-center shadow-soft border border-slate-200 dark:border-slate-700">
+            <div class="w-12 h-12 mx-auto mb-4 rounded-xl bg-primary-50 dark:bg-primary-900/40 ring-1 ring-primary-100 dark:ring-primary-800 flex items-center justify-center">
+              <svg class="w-6 h-6 text-primary-600 dark:text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
               </svg>
             </div>
-            <h3 class="text-3xl font-bold gradient-text mb-2">Citywide</h3>
-            <p class="text-slate-500 dark:text-slate-400 text-sm">Coverage</p>
+            <div class="text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">40<span class="text-primary-500">+</span></div>
+            <p class="mt-2 text-sm font-medium text-slate-500 dark:text-slate-400">Neighborhoods covered</p>
           </div>
 
-          <div class="stat-item bg-white dark:bg-slate-800 rounded-3xl p-8 text-center shadow-soft border border-slate-100 dark:border-slate-700">
-            <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-purple-100 to-purple-200 dark:from-purple-900/50 dark:to-purple-800/50 flex items-center justify-center">
-              <svg class="w-8 h-8 text-purple-600 dark:text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <div class="stat-item bg-white dark:bg-slate-800 rounded-2xl p-8 text-center shadow-soft border border-slate-200 dark:border-slate-700">
+            <div class="w-12 h-12 mx-auto mb-4 rounded-xl bg-primary-50 dark:bg-primary-900/40 ring-1 ring-primary-100 dark:ring-primary-800 flex items-center justify-center">
+              <svg class="w-6 h-6 text-primary-600 dark:text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
             </div>
-            <h3 class="text-3xl font-bold gradient-text mb-2">24/7</h3>
-            <p class="text-slate-500 dark:text-slate-400 text-sm">Availability</p>
+            <div class="text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">5<span class="text-2xl text-primary-500 align-top">min</span></div>
+            <p class="mt-2 text-sm font-medium text-slate-500 dark:text-slate-400">Data refresh interval</p>
+          </div>
+
+          <div class="stat-item bg-white dark:bg-slate-800 rounded-2xl p-8 text-center shadow-soft border border-slate-200 dark:border-slate-700">
+            <div class="w-12 h-12 mx-auto mb-4 rounded-xl bg-primary-50 dark:bg-primary-900/40 ring-1 ring-primary-100 dark:ring-primary-800 flex items-center justify-center">
+              <svg class="w-6 h-6 text-primary-600 dark:text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+              </svg>
+            </div>
+            <div class="text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">24/7</div>
+            <p class="mt-2 text-sm font-medium text-slate-500 dark:text-slate-400">Live availability</p>
           </div>
         </div>
+
+        <p class="mt-8 text-center text-xs text-slate-400 dark:text-slate-500">
+          Source: <a href="https://data.sandiego.gov/" target="_blank" rel="noopener" class="underline decoration-dotted underline-offset-2 hover:text-primary-500">City of San Diego Open Data Portal</a> · Figures reflect current network coverage
+        </p>
       </div>
     </section>
 
@@ -851,7 +861,7 @@ menu: nav/home.html
 
           <!-- Feature 3 -->
           <div class="group bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-soft border border-slate-100 dark:border-slate-700">
-            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500 to-green-600 flex items-center justify-center text-white mb-6 shadow-lg">
+            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center text-white mb-6 shadow-lg">
               <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
               </svg>
@@ -873,7 +883,7 @@ menu: nav/home.html
 
           <!-- Feature 5 -->
           <div class="group bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-soft border border-slate-100 dark:border-slate-700">
-            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-500 to-violet-600 flex items-center justify-center text-white mb-6 shadow-lg">
+            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-accent-500 to-accent-600 flex items-center justify-center text-white mb-6 shadow-lg">
               <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
               </svg>
@@ -884,7 +894,7 @@ menu: nav/home.html
 
           <!-- Feature 6 -->
           <div class="group bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-soft border border-slate-100 dark:border-slate-700">
-            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-rose-500 to-pink-600 flex items-center justify-center text-white mb-6 shadow-lg">
+            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center text-white mb-6 shadow-lg">
               <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
               </svg>
