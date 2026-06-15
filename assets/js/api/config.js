@@ -91,8 +91,15 @@ export function login(options) {
         .then(response => {
                 // Trap error response from Web API
                 if (!response.ok) {
-                        // 429 (rate limited) is likely here due to login throttling.
-                        const errorMsg = describeHttpError(response) || ('Login error: ' + response.status);
+                        // In the LOGIN context a 401 means bad credentials, not an
+                        // expired session — show a login-appropriate message. 429 is
+                        // login throttling; fall back to the shared messages otherwise.
+                        let errorMsg;
+                        if (response.status === 401) {
+                                errorMsg = 'Invalid username or password.';
+                        } else {
+                                errorMsg = describeHttpError(response) || ('Login error: ' + response.status);
+                        }
                         console.log('Login error: ' + response.status);
                         document.getElementById(options.message).textContent = errorMsg;
                         return;
