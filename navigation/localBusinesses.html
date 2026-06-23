@@ -653,7 +653,7 @@ nav: true
       return pathMatch[1];
     }
 
-    return '/SD_Auto_Frontend';
+    return '/Macro_Cosmos_Frontend';
   }
 
   function escapeHtml(value = '') {
@@ -726,7 +726,7 @@ nav: true
     const category = business.category || 'Local business';
     const neighborhood = business.neighborhood || 'San Diego';
     const website = sanitizeUrl(business.website || '#');
-    const description = business.description || 'Fresh listing available in the shared SD Auto business catalog.';
+    const description = business.description || 'Fresh listing available in the shared Macro Cosmos business catalog.';
     const spotlighted = getSpotlightedBusinessIds().includes(Number(business.id));
 
     return `

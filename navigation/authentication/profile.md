@@ -31,7 +31,7 @@ search_exclude: true
         <span class="inline-flex items-center gap-2 rounded-full border border-primary-200 bg-primary-50 px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-primary-700 dark:border-primary-900/60 dark:bg-primary-950/40 dark:text-primary-300">
             Account Center
         </span>
-        <h1 class="max-w-2xl text-4xl sm:text-5xl">Manage Your SD Auto Profile</h1>
+        <h1 class="max-w-2xl text-4xl sm:text-5xl">Manage Your Macro Cosmos Profile</h1>
         <p class="max-w-2xl text-lg text-slate-600 dark:text-slate-300">
             Update your public account details, rotate credentials, and keep your profile photo current without leaving the dashboard.
         </p>

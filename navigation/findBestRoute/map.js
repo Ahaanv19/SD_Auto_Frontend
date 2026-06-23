@@ -26,7 +26,7 @@ function getBaseUrl() {
   if (pathMatch && pathMatch[1] !== '/route') {
     return pathMatch[1];
   }
-  return '/SD_Auto_Frontend'; // Hardcoded fallback
+  return '/Macro_Cosmos_Frontend'; // Hardcoded fallback
 }
 
 // Mapping engine: MapLibre GL (WebGL), via the shared Leaflet-compatibility

@@ -1077,7 +1077,7 @@ function getWindDirection(deg) {
 async function fetchWeatherData() {
   try {
     const response = await fetch(NWS_OBSERVATION_URL, {
-      headers: { 'User-Agent': 'SD Auto (Jekyll) - https://www.sandiego.gov', 'Accept': 'application/geo+json' }
+      headers: { 'User-Agent': 'Macro Cosmos (Jekyll) - https://www.sandiego.gov', 'Accept': 'application/geo+json' }
     });
     if (!response.ok) throw new Error(`NWS API error: ${response.status}`);
 
@@ -1265,7 +1265,7 @@ function shareViaEmail() {
 }
 
 function shareViaTwitter() {
-  window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent('Found a great route on SD Auto!')}&url=${encodeURIComponent(generateShareUrl())}`);
+  window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent('Found a great route on Macro Cosmos!')}&url=${encodeURIComponent(generateShareUrl())}`);
 }
 
 function shareViaWhatsApp() {

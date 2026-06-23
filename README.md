@@ -93,7 +93,7 @@
   </ul>
 
   <p>
-    We’re excited to continue iterating and improving SD Auto to meet the growing needs of our
+    We’re excited to continue iterating and improving Macro Cosmos to meet the growing needs of our
     community. Thanks for following our journey!
   </p>
 </section>

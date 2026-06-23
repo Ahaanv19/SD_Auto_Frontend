@@ -15,7 +15,7 @@ search_exclude: true
   <div class="grid gap-8 lg:grid-cols-[0.85fr_1.15fr]">
     <aside class="rounded-[2.25rem] border border-primary-900/20 bg-gradient-to-br from-primary-900 via-primary-800 to-slate-900 p-8 text-white shadow-large lg:p-10">
       <span class="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-white/85">
-        SD Auto Access
+        Macro Cosmos Access
       </span>
       <h1 class="account-lead-title mt-6 max-w-md text-4xl sm:text-5xl">Access Your Routing Workspace</h1>
       <p class="mt-6 max-w-lg text-base leading-8 text-slate-200">

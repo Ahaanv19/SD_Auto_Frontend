@@ -12,26 +12,26 @@ menu: nav/home.html
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>SD Auto - Smart City Navigation | City of San Diego</title>
+  <title>Macro Cosmos - Smart City Navigation | City of San Diego</title>
 
   <!-- SEO Meta Tags -->
-  <meta name="description" content="SD Auto - Real-time traffic intelligence, optimized routing, and smart navigation designed for San Diego's streets. Built for efficiency, driven by data.">
-  <meta name="keywords" content="San Diego, navigation, traffic, route planning, smart city, SD Auto">
+  <meta name="description" content="Macro Cosmos - Real-time traffic intelligence, optimized routing, and smart navigation designed for San Diego's streets. Built for efficiency, driven by data.">
+  <meta name="keywords" content="San Diego, navigation, traffic, route planning, smart city, Macro Cosmos">
   <meta name="author" content="Ahaan Vaidyanathan">
   
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://ahaanv19.github.io/SD_Auto_Frontend/">
-  <meta property="og:title" content="SD Auto - Smart City Navigation for San Diego">
+  <meta property="og:url" content="https://ahaanv19.github.io/Macro_Cosmos_Frontend/">
+  <meta property="og:title" content="Macro Cosmos - Smart City Navigation for San Diego">
   <meta property="og:description" content="Real-time traffic intelligence, optimized routing, and smart navigation designed for San Diego's streets.">
-  <meta property="og:image" content="https://ahaanv19.github.io/SD_Auto_Frontend/images/og-image.png">
+  <meta property="og:image" content="https://ahaanv19.github.io/Macro_Cosmos_Frontend/images/og-image.png">
   
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:url" content="https://ahaanv19.github.io/SD_Auto_Frontend/">
-  <meta name="twitter:title" content="SD Auto - Smart City Navigation for San Diego">
+  <meta name="twitter:url" content="https://ahaanv19.github.io/Macro_Cosmos_Frontend/">
+  <meta name="twitter:title" content="Macro Cosmos - Smart City Navigation for San Diego">
   <meta name="twitter:description" content="Real-time traffic intelligence, optimized routing, and smart navigation designed for San Diego's streets.">
-  <meta name="twitter:image" content="https://ahaanv19.github.io/SD_Auto_Frontend/images/og-image.png">
+  <meta name="twitter:image" content="https://ahaanv19.github.io/Macro_Cosmos_Frontend/images/og-image.png">
 
   <!-- Preconnect for Performance -->
   <link rel="preconnect" href="https://unpkg.com">
@@ -635,7 +635,7 @@ menu: nav/home.html
             </h1>
 
             <p class="text-lg sm:text-xl text-slate-600 dark:text-slate-300 max-w-xl mx-auto lg:mx-0 leading-relaxed">
-              SD Auto combines live traffic density, hazard awareness, and route-aware local business context in one calmer planning surface built for San Diego streets.
+              Macro Cosmos combines live traffic density, hazard awareness, and route-aware local business context in one calmer planning surface built for San Diego streets.
             </p>
 
             <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
@@ -953,7 +953,7 @@ menu: nav/home.html
             Frequently Asked Questions
           </h2>
           <p class="text-lg text-slate-600 dark:text-slate-300">
-            Everything you need to know about SD Auto
+            Everything you need to know about Macro Cosmos
           </p>
         </div>
 
@@ -961,14 +961,14 @@ menu: nav/home.html
           <!-- FAQ Item 1 -->
           <div class="faq-item">
             <button class="faq-question" onclick="toggleFaq(this)">
-              <span>How does SD Auto find the best route?</span>
+              <span>How does Macro Cosmos find the best route?</span>
               <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
               </svg>
             </button>
             <div class="faq-answer">
               <div class="faq-answer-content">
-                SD Auto uses real-time traffic data from the City of San Diego's open data portal combined with advanced routing algorithms to calculate the fastest route based on current traffic conditions, road closures, and historical patterns.
+                Macro Cosmos uses real-time traffic data from the City of San Diego's open data portal combined with advanced routing algorithms to calculate the fastest route based on current traffic conditions, road closures, and historical patterns.
               </div>
             </div>
           </div>
@@ -976,14 +976,14 @@ menu: nav/home.html
           <!-- FAQ Item 2 -->
           <div class="faq-item">
             <button class="faq-question" onclick="toggleFaq(this)">
-              <span>Is SD Auto free to use?</span>
+              <span>Is Macro Cosmos free to use?</span>
               <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
               </svg>
             </button>
             <div class="faq-answer">
               <div class="faq-answer-content">
-                Yes! SD Auto offers a free tier with 4 route searches per day. For unlimited routes and advanced features like Daily Routine Planner and Favorite Locations, check out our Plus and Pro plans.
+                Yes! Macro Cosmos offers a free tier with 4 route searches per day. For unlimited routes and advanced features like Daily Routine Planner and Favorite Locations, check out our Plus and Pro plans.
               </div>
             </div>
           </div>
@@ -991,14 +991,14 @@ menu: nav/home.html
           <!-- FAQ Item 3 -->
           <div class="faq-item">
             <button class="faq-question" onclick="toggleFaq(this)">
-              <span>What areas does SD Auto cover?</span>
+              <span>What areas does Macro Cosmos cover?</span>
               <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
               </svg>
             </button>
             <div class="faq-answer">
               <div class="faq-answer-content">
-                SD Auto is optimized for the entire San Diego metropolitan area, including all neighborhoods from La Jolla to Chula Vista, and from the coast to East County. Our traffic data covers all major highways and surface streets.
+                Macro Cosmos is optimized for the entire San Diego metropolitan area, including all neighborhoods from La Jolla to Chula Vista, and from the coast to East County. Our traffic data covers all major highways and surface streets.
               </div>
             </div>
           </div>
@@ -1028,7 +1028,7 @@ menu: nav/home.html
             </button>
             <div class="faq-answer">
               <div class="faq-answer-content">
-                Yes! Plus and Pro subscribers can report road hazards, accidents, and other incidents. These reports help the entire SD Auto community stay informed and navigate safely.
+                Yes! Plus and Pro subscribers can report road hazards, accidents, and other incidents. These reports help the entire Macro Cosmos community stay informed and navigate safely.
               </div>
             </div>
           </div>
@@ -1057,7 +1057,7 @@ menu: nav/home.html
               Ready to Navigate Smarter?
             </h2>
             <p class="text-lg sm:text-xl text-primary-100 mb-8 max-w-2xl mx-auto">
-              Join thousands of San Diegans using SD Auto for their daily commute. Start optimizing your routes today.
+              Join thousands of San Diegans using Macro Cosmos for their daily commute. Start optimizing your routes today.
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
               <a href="{{site.baseurl}}/login" class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-primary-700 rounded-2xl font-bold text-base shadow-lg hover:shadow-xl hover:scale-105 transition duration-300 ease-out">
