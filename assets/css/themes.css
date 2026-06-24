@@ -1,0 +1,614 @@
+/* ================================================================
+   SD Auto — User Theme System
+   Applied via [data-theme="..."] on <html>
+   Font overrides via [data-font="..."] on <html>
+   All rules use !important to override Tailwind utility classes.
+   ================================================================ */
+
+/* ---- Font Family Overrides ---- */
+[data-font="serif"] body,
+[data-font="serif"] h1,
+[data-font="serif"] h2,
+[data-font="serif"] h3 {
+  font-family: 'Fraunces', Georgia, 'Times New Roman', serif !important;
+}
+[data-font="mono"] body {
+  font-family: ui-monospace, 'Cascadia Mono', 'Fira Code', 'Fira Mono', 'Courier New', monospace !important;
+}
+[data-font="dyslexic"] body,
+[data-font="dyslexic"] p,
+[data-font="dyslexic"] li,
+[data-font="dyslexic"] td,
+[data-font="dyslexic"] input,
+[data-font="dyslexic"] textarea {
+  font-family: 'Arial', 'Verdana', 'Trebuchet MS', sans-serif !important;
+  letter-spacing: 0.05em !important;
+  word-spacing: 0.16em !important;
+  line-height: 1.9 !important;
+}
+
+/* ================================================================
+   PRESET THEME: SD Dark
+   Handled primarily by Tailwind's dark: variants when dark class
+   is present. Minor accent tweaks only.
+   ================================================================ */
+[data-theme="dark"] body.site-body {
+  background: linear-gradient(135deg, #0b1320 0%, #111c2f 50%, #0b1320 100%) !important;
+}
+
+/* ================================================================
+   PRESET THEME: Purple Night (dark)
+   ================================================================ */
+[data-theme="purple-night"] body.site-body {
+  background: linear-gradient(135deg, #0d0a1e 0%, #1a0a2e 55%, #0f1120 100%) !important;
+  color: #ede9fe !important;
+}
+[data-theme="purple-night"] .glass {
+  background: rgba(26, 10, 46, 0.85) !important;
+  border-color: rgba(168, 85, 247, 0.25) !important;
+}
+[data-theme="purple-night"] .site-utilitybar {
+  background: linear-gradient(135deg, #1a0a2e, #2d1150) !important;
+  color: #e9d5ff !important;
+}
+[data-theme="purple-night"] .site-utilitybar a {
+  color: #e9d5ff !important;
+}
+[data-theme="purple-night"] .btn-primary,
+[data-theme="purple-night"] .shell-primary-action {
+  background: linear-gradient(135deg, #7c3aed 0%, #a855f7 100%) !important;
+  box-shadow: 0 10px 30px -10px rgba(168, 85, 247, 0.5) !important;
+}
+[data-theme="purple-night"] .btn-primary::before {
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent) !important;
+}
+[data-theme="purple-night"] .gradient-text {
+  background: linear-gradient(135deg, #c084fc 0%, #a855f7 50%, #818cf8 100%) !important;
+  background-size: 200% 200% !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+}
+[data-theme="purple-night"] .site-brand-mark {
+  background: linear-gradient(135deg, #7c3aed, #a855f7) !important;
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.4) !important;
+}
+[data-theme="purple-night"] .shell-nav-link::after {
+  background: linear-gradient(90deg, #a855f7, #818cf8) !important;
+}
+[data-theme="purple-night"] .floating-shape:nth-child(1) { background-color: #7c3aed !important; }
+[data-theme="purple-night"] .floating-shape:nth-child(2) { background-color: #a855f7 !important; }
+[data-theme="purple-night"] .floating-shape:nth-child(3) { background-color: #818cf8 !important; }
+[data-theme="purple-night"] ::selection { background-color: #7c3aed !important; color: #f3e8ff !important; }
+[data-theme="purple-night"] ::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #7c3aed, #a855f7) !important;
+}
+[data-theme="purple-night"] ::-webkit-scrollbar-track { background: #1a0a2e !important; }
+
+/* ================================================================
+   PRESET THEME: Velvet Purple (light)
+   ================================================================ */
+[data-theme="velvet-purple"] body.site-body {
+  background: linear-gradient(135deg, #faf5ff 0%, #ede9fe 55%, #ddd6fe 100%) !important;
+  color: #3b0764 !important;
+}
+[data-theme="velvet-purple"] .glass {
+  background: rgba(250, 245, 255, 0.88) !important;
+  border-color: rgba(167, 139, 250, 0.4) !important;
+}
+[data-theme="velvet-purple"] .site-utilitybar {
+  background: linear-gradient(135deg, #4c1d95, #6d28d9) !important;
+}
+[data-theme="velvet-purple"] .btn-primary,
+[data-theme="velvet-purple"] .shell-primary-action {
+  background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%) !important;
+}
+[data-theme="velvet-purple"] .gradient-text {
+  background: linear-gradient(135deg, #7c3aed 0%, #a855f7 50%, #6d28d9 100%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+}
+[data-theme="velvet-purple"] .site-brand-mark {
+  background: linear-gradient(135deg, #7c3aed, #c084fc) !important;
+}
+[data-theme="velvet-purple"] .shell-nav-link::after {
+  background: linear-gradient(90deg, #7c3aed, #c084fc) !important;
+}
+[data-theme="velvet-purple"] .floating-shape:nth-child(1) { background-color: #a855f7 !important; }
+[data-theme="velvet-purple"] .floating-shape:nth-child(2) { background-color: #7c3aed !important; }
+[data-theme="velvet-purple"] .floating-shape:nth-child(3) { background-color: #c084fc !important; }
+[data-theme="velvet-purple"] ::selection { background-color: #7c3aed !important; color: white !important; }
+[data-theme="velvet-purple"] ::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #7c3aed, #a855f7) !important;
+}
+[data-theme="velvet-purple"] .shell-nav-link {
+  color: #4c1d95 !important;
+}
+[data-theme="velvet-purple"] .shell-nav-link:hover {
+  color: #6d28d9 !important;
+}
+
+/* ================================================================
+   PRESET THEME: Ocean Blue (dark)
+   ================================================================ */
+[data-theme="ocean-blue"] body.site-body {
+  background: linear-gradient(135deg, #0c1445 0%, #1e3a5f 55%, #0a2540 100%) !important;
+  color: #e0f2fe !important;
+}
+[data-theme="ocean-blue"] .glass {
+  background: rgba(12, 20, 69, 0.88) !important;
+  border-color: rgba(14, 165, 233, 0.25) !important;
+}
+[data-theme="ocean-blue"] .site-utilitybar {
+  background: linear-gradient(135deg, #0a2540, #1e3a5f) !important;
+  color: #bae6fd !important;
+}
+[data-theme="ocean-blue"] .site-utilitybar a { color: #bae6fd !important; }
+[data-theme="ocean-blue"] .btn-primary,
+[data-theme="ocean-blue"] .shell-primary-action {
+  background: linear-gradient(135deg, #0284c7 0%, #0ea5e9 100%) !important;
+  box-shadow: 0 10px 30px -10px rgba(14, 165, 233, 0.5) !important;
+}
+[data-theme="ocean-blue"] .gradient-text {
+  background: linear-gradient(135deg, #38bdf8 0%, #0ea5e9 50%, #22d3ee 100%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+}
+[data-theme="ocean-blue"] .site-brand-mark {
+  background: linear-gradient(135deg, #0284c7, #0ea5e9) !important;
+  box-shadow: 0 0 20px rgba(14, 165, 233, 0.4) !important;
+}
+[data-theme="ocean-blue"] .shell-nav-link::after {
+  background: linear-gradient(90deg, #0ea5e9, #22d3ee) !important;
+}
+[data-theme="ocean-blue"] .floating-shape:nth-child(1) { background-color: #0ea5e9 !important; }
+[data-theme="ocean-blue"] .floating-shape:nth-child(2) { background-color: #22d3ee !important; }
+[data-theme="ocean-blue"] .floating-shape:nth-child(3) { background-color: #38bdf8 !important; }
+[data-theme="ocean-blue"] ::selection { background-color: #0284c7 !important; color: white !important; }
+[data-theme="ocean-blue"] ::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #0284c7, #0ea5e9) !important;
+}
+[data-theme="ocean-blue"] ::-webkit-scrollbar-track { background: #0c1445 !important; }
+
+/* ================================================================
+   PRESET THEME: Sunset (light)
+   ================================================================ */
+[data-theme="sunset"] body.site-body {
+  background: linear-gradient(135deg, #fff7ed 0%, #fef3c7 45%, #ffe4e6 100%) !important;
+  color: #431407 !important;
+}
+[data-theme="sunset"] .glass {
+  background: rgba(255, 247, 237, 0.88) !important;
+  border-color: rgba(234, 88, 12, 0.2) !important;
+}
+[data-theme="sunset"] .site-utilitybar {
+  background: linear-gradient(135deg, #9a3412, #c2410c) !important;
+}
+[data-theme="sunset"] .btn-primary,
+[data-theme="sunset"] .shell-primary-action {
+  background: linear-gradient(135deg, #dc2626 0%, #ea580c 100%) !important;
+}
+[data-theme="sunset"] .gradient-text {
+  background: linear-gradient(135deg, #ea580c 0%, #f97316 50%, #fbbf24 100%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+}
+[data-theme="sunset"] .site-brand-mark {
+  background: linear-gradient(135deg, #ea580c, #fbbf24) !important;
+}
+[data-theme="sunset"] .shell-nav-link::after {
+  background: linear-gradient(90deg, #ea580c, #fbbf24) !important;
+}
+[data-theme="sunset"] .shell-nav-link { color: #7c2d12 !important; }
+[data-theme="sunset"] .shell-nav-link:hover { color: #ea580c !important; }
+[data-theme="sunset"] .floating-shape:nth-child(1) { background-color: #f97316 !important; }
+[data-theme="sunset"] .floating-shape:nth-child(2) { background-color: #fbbf24 !important; }
+[data-theme="sunset"] .floating-shape:nth-child(3) { background-color: #ef4444 !important; }
+[data-theme="sunset"] ::selection { background-color: #ea580c !important; color: white !important; }
+[data-theme="sunset"] ::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #ea580c, #c2410c) !important;
+}
+
+/* ================================================================
+   PRESET THEME: Forest (light)
+   ================================================================ */
+[data-theme="forest"] body.site-body {
+  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 50%, #d1fae5 100%) !important;
+  color: #14532d !important;
+}
+[data-theme="forest"] .glass {
+  background: rgba(240, 253, 244, 0.88) !important;
+  border-color: rgba(22, 163, 74, 0.25) !important;
+}
+[data-theme="forest"] .site-utilitybar {
+  background: linear-gradient(135deg, #14532d, #15803d) !important;
+}
+[data-theme="forest"] .btn-primary,
+[data-theme="forest"] .shell-primary-action {
+  background: linear-gradient(135deg, #15803d 0%, #16a34a 100%) !important;
+}
+[data-theme="forest"] .gradient-text {
+  background: linear-gradient(135deg, #15803d 0%, #16a34a 50%, #059669 100%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+}
+[data-theme="forest"] .site-brand-mark {
+  background: linear-gradient(135deg, #15803d, #059669) !important;
+}
+[data-theme="forest"] .shell-nav-link::after {
+  background: linear-gradient(90deg, #16a34a, #059669) !important;
+}
+[data-theme="forest"] .shell-nav-link { color: #14532d !important; }
+[data-theme="forest"] .shell-nav-link:hover { color: #16a34a !important; }
+[data-theme="forest"] .floating-shape:nth-child(1) { background-color: #16a34a !important; }
+[data-theme="forest"] .floating-shape:nth-child(2) { background-color: #059669 !important; }
+[data-theme="forest"] .floating-shape:nth-child(3) { background-color: #34d399 !important; }
+[data-theme="forest"] ::selection { background-color: #16a34a !important; color: white !important; }
+[data-theme="forest"] ::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #16a34a, #15803d) !important;
+}
+
+/* ================================================================
+   ACCESSIBILITY THEME: High Contrast Dark
+   ================================================================ */
+[data-theme="high-contrast-dark"] body.site-body {
+  background: #000000 !important;
+  color: #ffffff !important;
+}
+[data-theme="high-contrast-dark"] .glass {
+  background: #000000 !important;
+  border: 2px solid #ffffff !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+[data-theme="high-contrast-dark"] header.site-header {
+  border-bottom: 2px solid #ffffff !important;
+}
+[data-theme="high-contrast-dark"] .site-utilitybar {
+  background: #000000 !important;
+  border-bottom: 2px solid #ffff00 !important;
+  color: #ffff00 !important;
+}
+[data-theme="high-contrast-dark"] .site-utilitybar a { color: #ffff00 !important; }
+[data-theme="high-contrast-dark"] .btn-primary,
+[data-theme="high-contrast-dark"] .shell-primary-action {
+  background: #ffff00 !important;
+  color: #000000 !important;
+  border: 2px solid #ffffff !important;
+  box-shadow: none !important;
+}
+[data-theme="high-contrast-dark"] .btn-primary::before { display: none !important; }
+[data-theme="high-contrast-dark"] .gradient-text {
+  background: #ffff00 !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  animation: none !important;
+}
+[data-theme="high-contrast-dark"] .site-brand-mark {
+  background: #ffff00 !important;
+}
+[data-theme="high-contrast-dark"] .site-brand-mark svg { color: #000000 !important; }
+[data-theme="high-contrast-dark"] .floating-shape { display: none !important; }
+[data-theme="high-contrast-dark"] ::selection { background-color: #ffff00 !important; color: #000000 !important; }
+[data-theme="high-contrast-dark"] ::-webkit-scrollbar-thumb { background: #ffffff !important; }
+[data-theme="high-contrast-dark"] a { color: #00ffff !important; text-decoration: underline !important; }
+[data-theme="high-contrast-dark"] a:hover { color: #ffff00 !important; }
+[data-theme="high-contrast-dark"] .shell-nav-link { color: #ffffff !important; }
+[data-theme="high-contrast-dark"] .shell-nav-link:hover { color: #ffff00 !important; }
+[data-theme="high-contrast-dark"] .shell-nav-link::after { background: #ffff00 !important; }
+[data-theme="high-contrast-dark"] .shell-secondary-action { color: #ffffff !important; border: 1px solid #ffffff !important; }
+[data-theme="high-contrast-dark"] .card-hover:hover { box-shadow: 0 0 0 3px #ffff00 !important; transform: none !important; }
+[data-theme="high-contrast-dark"] *:focus-visible { outline: 3px solid #ffff00 !important; }
+
+/* ================================================================
+   ACCESSIBILITY THEME: High Contrast Light
+   ================================================================ */
+[data-theme="high-contrast-light"] body.site-body {
+  background: #ffffff !important;
+  color: #000000 !important;
+}
+[data-theme="high-contrast-light"] .glass {
+  background: #ffffff !important;
+  border: 2px solid #000000 !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+[data-theme="high-contrast-light"] header.site-header {
+  border-bottom: 3px solid #000000 !important;
+}
+[data-theme="high-contrast-light"] .site-utilitybar {
+  background: #000000 !important;
+  color: #ffffff !important;
+}
+[data-theme="high-contrast-light"] .site-utilitybar a { color: #ffffff !important; }
+[data-theme="high-contrast-light"] .btn-primary,
+[data-theme="high-contrast-light"] .shell-primary-action {
+  background: #000099 !important;
+  color: #ffffff !important;
+  border: 2px solid #000000 !important;
+  box-shadow: none !important;
+}
+[data-theme="high-contrast-light"] .btn-primary::before { display: none !important; }
+[data-theme="high-contrast-light"] .gradient-text {
+  background: #000099 !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  animation: none !important;
+}
+[data-theme="high-contrast-light"] .site-brand-mark {
+  background: #000099 !important;
+}
+[data-theme="high-contrast-light"] .floating-shape { display: none !important; }
+[data-theme="high-contrast-light"] ::selection { background-color: #000099 !important; color: #ffffff !important; }
+[data-theme="high-contrast-light"] ::-webkit-scrollbar-thumb { background: #000000 !important; }
+[data-theme="high-contrast-light"] a { color: #000099 !important; text-decoration: underline !important; }
+[data-theme="high-contrast-light"] a:hover { color: #660066 !important; }
+[data-theme="high-contrast-light"] .shell-nav-link { color: #000000 !important; font-weight: 700 !important; }
+[data-theme="high-contrast-light"] .shell-nav-link:hover { color: #000099 !important; }
+[data-theme="high-contrast-light"] .shell-nav-link::after { background: #000099 !important; }
+[data-theme="high-contrast-light"] .card-hover:hover { box-shadow: 0 0 0 3px #000099 !important; transform: none !important; }
+[data-theme="high-contrast-light"] *:focus-visible { outline: 3px solid #000099 !important; }
+
+/* ================================================================
+   ACCESSIBILITY THEME: Colorblind Friendly (Deuteranopia-safe)
+   Uses blue/orange — avoids red-green meaningful distinctions.
+   ================================================================ */
+[data-theme="colorblind"] body.site-body {
+  background: linear-gradient(135deg, #f8fafc 0%, #eff6ff 55%, #f8fafc 100%) !important;
+  color: #1a1a2e !important;
+}
+[data-theme="colorblind"] .glass {
+  background: rgba(255, 255, 255, 0.92) !important;
+  border-color: rgba(0, 102, 204, 0.25) !important;
+}
+[data-theme="colorblind"] .site-utilitybar {
+  background: linear-gradient(135deg, #003d82, #0066cc) !important;
+}
+[data-theme="colorblind"] .btn-primary,
+[data-theme="colorblind"] .shell-primary-action {
+  background: linear-gradient(135deg, #0066cc 0%, #003d82 100%) !important;
+}
+[data-theme="colorblind"] .gradient-text {
+  background: linear-gradient(135deg, #0066cc 0%, #cc6600 100%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  animation: none !important;
+}
+[data-theme="colorblind"] .site-brand-mark {
+  background: linear-gradient(135deg, #003d82, #0066cc) !important;
+}
+[data-theme="colorblind"] .shell-nav-link::after {
+  background: #0066cc !important;
+}
+[data-theme="colorblind"] .floating-shape:nth-child(1) { background-color: #0066cc !important; }
+[data-theme="colorblind"] .floating-shape:nth-child(2) { background-color: #cc6600 !important; }
+[data-theme="colorblind"] .floating-shape:nth-child(3) { background-color: #0099cc !important; }
+[data-theme="colorblind"] ::selection { background-color: #0066cc !important; color: white !important; }
+[data-theme="colorblind"] ::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #0066cc, #003d82) !important;
+}
+
+/* ================================================================
+   ACCESSIBILITY THEME: Dyslexia Friendly
+   Cream background reduces visual stress. Wider spacing aids reading.
+   ================================================================ */
+[data-theme="dyslexia"] body.site-body {
+  background: #fef9e7 !important;
+  color: #1a1a1a !important;
+  font-family: 'Arial', 'Verdana', sans-serif !important;
+  font-size: 17px !important;
+  letter-spacing: 0.04em !important;
+  word-spacing: 0.12em !important;
+  line-height: 1.85 !important;
+}
+[data-theme="dyslexia"] p,
+[data-theme="dyslexia"] li,
+[data-theme="dyslexia"] td,
+[data-theme="dyslexia"] label {
+  letter-spacing: 0.04em !important;
+  word-spacing: 0.12em !important;
+  line-height: 1.85 !important;
+}
+[data-theme="dyslexia"] .glass {
+  background: rgba(254, 249, 231, 0.95) !important;
+  border-color: rgba(120, 80, 0, 0.2) !important;
+}
+[data-theme="dyslexia"] .site-utilitybar {
+  background: linear-gradient(135deg, #5b4100, #78560a) !important;
+}
+[data-theme="dyslexia"] .btn-primary,
+[data-theme="dyslexia"] .shell-primary-action {
+  background: linear-gradient(135deg, #1a5276 0%, #1f618d 100%) !important;
+}
+[data-theme="dyslexia"] .gradient-text {
+  background: linear-gradient(135deg, #1a5276 0%, #1f618d 100%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  animation: none !important;
+}
+[data-theme="dyslexia"] .site-brand-mark {
+  background: linear-gradient(135deg, #1a5276, #1f618d) !important;
+}
+[data-theme="dyslexia"] .shell-nav-link { color: #1a3a4a !important; }
+[data-theme="dyslexia"] .shell-nav-link:hover { color: #1a5276 !important; }
+[data-theme="dyslexia"] .shell-nav-link::after { background: #1a5276 !important; }
+[data-theme="dyslexia"] .floating-shape:nth-child(1) { background-color: #aab7b8 !important; opacity: 0.1 !important; }
+[data-theme="dyslexia"] .floating-shape:nth-child(2) { background-color: #d5d8dc !important; opacity: 0.1 !important; }
+[data-theme="dyslexia"] .floating-shape:nth-child(3) { background-color: #bdc3c7 !important; opacity: 0.1 !important; }
+[data-theme="dyslexia"] ::selection { background-color: #f9e79f !important; color: #1a1a1a !important; }
+[data-theme="dyslexia"] ::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #1a5276, #1f618d) !important;
+}
+[data-theme="dyslexia"] a { text-decoration: underline !important; }
+
+/* ================================================================
+   CUSTOM THEME — CSS is injected dynamically via <style id="sd-custom-theme">
+   This placeholder just ensures [data-theme="custom"] is recognized.
+   ================================================================ */
+[data-theme="custom"] {
+  /* Styles injected at runtime */
+}
+
+/* ================================================================
+   LOGIN PAGE THEMING
+   The login aside uses hardcoded Tailwind gradient classes
+   (from-primary-900 via-primary-800 to-slate-900) that don't
+   respond to data-theme automatically — we override them here.
+   Targets: #account-access aside  (hero panel)
+            #account-access button[type="submit"]  (form submit)
+   The form cards (bg-white/dark:bg-slate-900) already respond
+   to the html.dark class which we manage centrally.
+   ================================================================ */
+
+/* -- default / SD Blue: no overrides needed (palette already blue) -- */
+
+/* -- SD Dark -- */
+[data-theme="dark"] #account-access aside {
+  background: linear-gradient(135deg, #0b1320 0%, #0d1b30 55%, #0f2744 100%) !important;
+}
+[data-theme="dark"] #account-access button[type="submit"] {
+  background: linear-gradient(90deg, #0d4f84, #0b416c) !important;
+}
+
+/* -- Purple Night -- */
+[data-theme="purple-night"] #account-access aside {
+  background: linear-gradient(135deg, #0d0a1e 0%, #1a0a2e 55%, #2d1150 100%) !important;
+}
+[data-theme="purple-night"] #account-access button[type="submit"] {
+  background: linear-gradient(90deg, #7c3aed, #6d28d9) !important;
+}
+
+/* -- Velvet Purple (light) -- */
+[data-theme="velvet-purple"] #account-access aside {
+  background: linear-gradient(135deg, #4c1d95 0%, #6d28d9 55%, #7c3aed 100%) !important;
+}
+[data-theme="velvet-purple"] #account-access button[type="submit"] {
+  background: linear-gradient(90deg, #7c3aed, #6d28d9) !important;
+}
+/* Form cards stay white in velvet-purple (light theme) */
+[data-theme="velvet-purple"] #account-access section.rounded-\[2rem\] {
+  background: rgba(250, 245, 255, 0.92) !important;
+  border-color: rgba(167, 139, 250, 0.35) !important;
+}
+
+/* -- Ocean Blue (dark) -- */
+[data-theme="ocean-blue"] #account-access aside {
+  background: linear-gradient(135deg, #0c1445 0%, #1e3a5f 55%, #0a4080 100%) !important;
+}
+[data-theme="ocean-blue"] #account-access button[type="submit"] {
+  background: linear-gradient(90deg, #0284c7, #0369a1) !important;
+}
+
+/* -- Sunset (light) -- */
+[data-theme="sunset"] #account-access aside {
+  background: linear-gradient(135deg, #7c2d12 0%, #9a3412 55%, #c2410c 100%) !important;
+}
+[data-theme="sunset"] #account-access button[type="submit"] {
+  background: linear-gradient(90deg, #ea580c, #c2410c) !important;
+}
+[data-theme="sunset"] #account-access section.rounded-\[2rem\] {
+  background: rgba(255, 247, 237, 0.92) !important;
+  border-color: rgba(234, 88, 12, 0.2) !important;
+}
+[data-theme="sunset"] #account-access input {
+  background: rgba(255, 247, 237, 0.95) !important;
+  border-color: rgba(234, 88, 12, 0.25) !important;
+  color: #431407 !important;
+}
+
+/* -- Forest (light) -- */
+[data-theme="forest"] #account-access aside {
+  background: linear-gradient(135deg, #14532d 0%, #15803d 55%, #166534 100%) !important;
+}
+[data-theme="forest"] #account-access button[type="submit"] {
+  background: linear-gradient(90deg, #16a34a, #15803d) !important;
+}
+[data-theme="forest"] #account-access section.rounded-\[2rem\] {
+  background: rgba(240, 253, 244, 0.92) !important;
+  border-color: rgba(22, 163, 74, 0.2) !important;
+}
+[data-theme="forest"] #account-access input {
+  background: rgba(240, 253, 244, 0.95) !important;
+  border-color: rgba(22, 163, 74, 0.25) !important;
+  color: #14532d !important;
+}
+
+/* -- High Contrast Dark -- */
+[data-theme="high-contrast-dark"] #account-access aside {
+  background: #000000 !important;
+  border: 2px solid #ffff00 !important;
+}
+[data-theme="high-contrast-dark"] #account-access button[type="submit"] {
+  background: #ffff00 !important;
+  color: #000000 !important;
+  border: 2px solid #ffffff !important;
+}
+[data-theme="high-contrast-dark"] #account-access section.rounded-\[2rem\] {
+  background: #000000 !important;
+  border: 2px solid #ffffff !important;
+}
+[data-theme="high-contrast-dark"] #account-access input {
+  background: #000000 !important;
+  border: 2px solid #ffffff !important;
+  color: #ffffff !important;
+}
+[data-theme="high-contrast-dark"] #account-access label {
+  color: #ffffff !important;
+}
+
+/* -- High Contrast Light -- */
+[data-theme="high-contrast-light"] #account-access aside {
+  background: #000099 !important;
+  border: 2px solid #000000 !important;
+}
+[data-theme="high-contrast-light"] #account-access button[type="submit"] {
+  background: #000099 !important;
+  color: #ffffff !important;
+  border: 2px solid #000000 !important;
+}
+[data-theme="high-contrast-light"] #account-access section.rounded-\[2rem\] {
+  background: #ffffff !important;
+  border: 2px solid #000000 !important;
+}
+[data-theme="high-contrast-light"] #account-access input {
+  background: #ffffff !important;
+  border: 2px solid #000000 !important;
+  color: #000000 !important;
+}
+
+/* -- Colorblind Friendly -- */
+[data-theme="colorblind"] #account-access aside {
+  background: linear-gradient(135deg, #003d82 0%, #0052a3 55%, #003d82 100%) !important;
+}
+[data-theme="colorblind"] #account-access button[type="submit"] {
+  background: linear-gradient(90deg, #0066cc, #003d82) !important;
+}
+
+/* -- Dyslexia Friendly -- */
+[data-theme="dyslexia"] #account-access aside {
+  background: linear-gradient(135deg, #1a3a4a 0%, #1a5276 55%, #1f618d 100%) !important;
+}
+[data-theme="dyslexia"] #account-access button[type="submit"] {
+  background: linear-gradient(90deg, #1a5276, #1f618d) !important;
+}
+[data-theme="dyslexia"] #account-access section.rounded-\[2rem\] {
+  background: rgba(254, 249, 231, 0.95) !important;
+  border-color: rgba(26, 82, 118, 0.25) !important;
+}
+[data-theme="dyslexia"] #account-access input {
+  background: rgba(254, 249, 231, 0.98) !important;
+  border-color: rgba(26, 82, 118, 0.3) !important;
+  color: #1a1a1a !important;
+}
+[data-theme="dyslexia"] #account-access label {
+  color: #1a1a1a !important;
+  letter-spacing: 0.04em !important;
+}
+
+/* -- Custom -- */
+[data-theme="custom"] #account-access aside {
+  /* Background injected at runtime via sd-custom-theme style tag */
+  background: var(--sd-custom-aside-bg, linear-gradient(135deg, #1a0a2e, #2d1150)) !important;
+}
+[data-theme="custom"] #account-access button[type="submit"] {
+  background: var(--sd-custom-primary, #0f5c99) !important;
+}
