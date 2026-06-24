@@ -3,54 +3,6 @@
 
 <head>
   <meta charset="UTF-8" />
-  <!-- ====== THEME LOADER (runs sync before body renders — prevents flash) ====== -->
-  <script>
-    (function () {
-      try {
-        var DARK_THEMES = ['dark', 'purple-night', 'ocean-blue', 'high-contrast-dark'];
-        var theme = localStorage.getItem('userTheme') || 'default';
-        var html = document.documentElement;
-        if (theme !== 'default') html.setAttribute('data-theme', theme);
-        if (DARK_THEMES.indexOf(theme) !== -1) {
-          html.classList.add('dark');
-        } else if (theme === 'default' && localStorage.getItem('theme') === 'dark') {
-          html.classList.add('dark');
-        } else if (theme !== 'default') {
-          html.classList.remove('dark');
-        }
-        // Inject custom theme CSS inline if active
-        if (theme === 'custom') {
-          var themes = JSON.parse(localStorage.getItem('customThemes') || '[]');
-          var aid = localStorage.getItem('activeCustomThemeId');
-          var ct = null;
-          for (var i = 0; i < themes.length; i++) { if (themes[i].id === aid) { ct = themes[i]; break; } }
-          if (ct) {
-            var s = document.createElement('style');
-            s.id = 'sd-custom-theme';
-            s.textContent = '[data-theme="custom"] body.site-body{background:linear-gradient(135deg,' + ct.bgFrom + ',' + ct.bgTo + ')!important;color:' + ct.text + '!important;}' +
-              '[data-theme="custom"] .glass{background:' + ct.surface + 'dd!important;border-color:' + ct.primary + '44!important;}' +
-              '[data-theme="custom"] .site-utilitybar{background:' + ct.navBg + '!important;}' +
-              '[data-theme="custom"] .btn-primary,[data-theme="custom"] .shell-primary-action{background:' + ct.primary + '!important;}' +
-              '[data-theme="custom"] .gradient-text{background:' + ct.primary + '!important;-webkit-background-clip:text!important;background-clip:text!important;}' +
-              '[data-theme="custom"] .site-brand-mark{background:' + ct.primary + '!important;}' +
-              '[data-theme="custom"] ::selection{background-color:' + ct.primary + '!important;color:#fff!important;}' +
-              '[data-theme="custom"] ::-webkit-scrollbar-thumb{background:' + ct.primary + '!important;}' +
-              '[data-theme="custom"] #account-access aside{background:linear-gradient(135deg,' + ct.navBg + ',' + ct.bgFrom + ')!important;}' +
-              '[data-theme="custom"] #account-access button[type="submit"]{background:' + ct.primary + '!important;}';
-            if (ct.dark) html.classList.add('dark');
-            document.head.appendChild(s);
-          }
-        }
-        // Font size (applied to html so rem units scale proportionally)
-        var fs = localStorage.getItem('themeFontSize');
-        if (fs) { var fm = {sm:'13px',md:'16px',lg:'18px',xl:'20px'}; html.style.fontSize = fm[fs] || '16px'; }
-        // Font family
-        var ff = localStorage.getItem('themeFontFamily');
-        if (ff && ff !== 'sans') html.setAttribute('data-font', ff);
-      } catch (e) {}
-    })();
-  </script>
-  <!-- ====== END THEME LOADER ====== -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- Content Security Policy (XSS defense).
@@ -63,13 +15,10 @@
        frame-ancestors at the nginx/CDN layer for clickjacking protection). -->
   <meta http-equiv="Content-Security-Policy" content="default-src 'self' https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: blob: https:; font-src 'self' data: https:; connect-src 'self' https: http://localhost:8888 http://127.0.0.1:8888; worker-src 'self' blob:; object-src 'none'; base-uri 'self'">
 
-  <!-- Theme overrides stylesheet -->
-  <link rel="stylesheet" href="{{site.baseurl}}/assets/css/themes.css">
-
   <!-- DOMPurify for sanitizing any rich HTML before DOM insertion -->
   <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.9/dist/purify.min.js"></script>
 
-  <title>{{ page.title | default: "SD Auto" }} | City of San Diego</title>
+  <title>{{ page.title | default: "Macro Cosmos" }} | San Diego County</title>
 
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -615,7 +564,7 @@
         <svg class="w-3.5 h-3.5 opacity-90" fill="currentColor" viewBox="0 0 20 20">
           <path d="M10 1l9 4v2H1V5l9-4zM3 8h2v7H3V8zm4 0h2v7H7V8zm4 0h2v7h-2V8zm4 0h2v7h-2V8zM1 16h18v2H1v-2z"/>
         </svg>
-        An official Smart Mobility initiative of the City of San Diego
+        An official Smart Mobility initiative of San Diego County
       </span>
       <a href="https://data.sandiego.gov/" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 font-medium opacity-90 hover:opacity-100 transition-opacity">
         Powered by San Diego Open Data
@@ -631,15 +580,15 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16 lg:h-20">
         <!-- Logo Section -->
-        <a href="/SD_Auto_Frontend/" class="flex items-center gap-3 group">
+        <a href="/Macro_Cosmos_Frontend/" class="flex items-center gap-3 group">
           <div class="site-brand-mark w-10 h-10 lg:w-12 lg:h-12 rounded-xl bg-gradient-to-br from-primary-500 to-accent-600 flex items-center justify-center shadow-lg group-hover:shadow-glow transition duration-300 ease-out group-hover:scale-105">
             <svg class="w-6 h-6 lg:w-7 lg:h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
             </svg>
           </div>
           <div class="hidden sm:block">
-            <span class="text-xl lg:text-2xl font-bold gradient-text">SD Auto</span>
-            <span class="site-brand-subtitle block text-xs text-slate-500 dark:text-slate-400 font-medium -mt-1">City of San Diego</span>
+            <span class="text-xl lg:text-2xl font-bold gradient-text">Macro Cosmos</span>
+            <span class="site-brand-subtitle block text-xs text-slate-500 dark:text-slate-400 font-medium -mt-1">San Diego County</span>
           </div>
         </a>
 
@@ -663,6 +612,13 @@
               <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z" clip-rule="evenodd"/>
             </svg>
             <span>Admin</span>
+          </a>
+          <!-- Business Portal Link (hidden by default, shown for business accounts) -->
+          <a href="{{site.baseurl}}/business" id="business-nav-link" class="hidden shell-nav-link nav-link px-4 py-2 text-sm font-medium text-emerald-500 hover:text-emerald-400 rounded-lg transition-colors flex items-center gap-1">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M4 4a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2H4zm3 3a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"/>
+            </svg>
+            <span>My Business</span>
           </a>
         </nav>
 
@@ -693,31 +649,18 @@
               // Dark mode logic
               const toggleBtn = document.getElementById('theme-toggle');
               const html = document.documentElement;
-              const SUN_ICON = '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path></svg>';
-              const MOON_ICON = '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>';
-              const DARK_THEMES_NAV = ['dark', 'purple-night', 'ocean-blue', 'high-contrast-dark'];
               function applyTheme() {
-                const ut = localStorage.getItem('userTheme') || 'default';
-                const isDark = DARK_THEMES_NAV.includes(ut) || (ut === 'default' && localStorage.getItem('theme') === 'dark');
-                if (isDark) { html.classList.add('dark'); toggleBtn.innerHTML = SUN_ICON; }
-                else { html.classList.remove('dark'); toggleBtn.innerHTML = MOON_ICON; }
+                if (localStorage.getItem('theme') === 'dark') {
+                  html.classList.add('dark');
+                  toggleBtn.innerHTML = '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path></svg>';
+                } else {
+                  html.classList.remove('dark');
+                  toggleBtn.innerHTML = '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>';
+                }
               }
               toggleBtn.addEventListener('click', () => {
-                const ut = localStorage.getItem('userTheme') || 'default';
-                const isDark = DARK_THEMES_NAV.includes(ut) || (ut === 'default' && localStorage.getItem('theme') === 'dark');
-                if (isDark) {
-                  html.removeAttribute('data-theme');
-                  html.classList.remove('dark');
-                  localStorage.setItem('theme', 'light');
-                  localStorage.setItem('userTheme', 'default');
-                  const cs = document.getElementById('sd-custom-theme');
-                  if (cs) cs.remove();
-                } else {
-                  html.setAttribute('data-theme', 'dark');
-                  html.classList.add('dark');
-                  localStorage.setItem('theme', 'dark');
-                  localStorage.setItem('userTheme', 'dark');
-                }
+                const current = localStorage.getItem('theme') === 'dark';
+                localStorage.setItem('theme', current ? 'light' : 'dark');
                 applyTheme();
               });
               applyTheme();
@@ -749,6 +692,13 @@
                   if (mSignInText) mSignInText.textContent = currentUser.name || "Profile";
                 }
                 if (mLogout) { mLogout.classList.remove('hidden'); mLogout.classList.add('flex'); }
+
+                // Show the Business Portal link for business (and admin) accounts.
+                if (currentUser.role === 'Business' || currentUser.role === 'Admin') {
+                  document.getElementById('business-nav-link')?.classList.remove('hidden');
+                  const mBiz = document.getElementById('mobile-business-link');
+                  if (mBiz) { mBiz.classList.remove('hidden'); mBiz.classList.add('flex'); }
+                }
 
                 // Check if user is Admin - they have full access
                 if (currentUser.role === 'Admin') {
@@ -795,14 +745,6 @@
             }
           </script>
 
-          <!-- Settings Link -->
-          <a href="{{site.baseurl}}/settings" title="Settings" class="shell-icon-action p-2.5 text-slate-500 hover:text-primary-600 dark:text-slate-400 dark:hover:text-primary-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition duration-200 ease-out focus:outline-none">
-            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-            </svg>
-          </a>
-
           <!-- Theme Toggle -->
           <button id="theme-toggle" class="shell-icon-action p-2.5 text-slate-500 hover:text-primary-600 dark:text-slate-400 dark:hover:text-primary-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition duration-200 ease-out focus:outline-none">
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
@@ -835,6 +777,13 @@
                   <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z" clip-rule="evenodd"/>
                 </svg>
                 <span>Admin</span>
+              </a>
+              <!-- Business Portal Link (Mobile, hidden by default; shown for business accounts via JS) -->
+              <a href="{{site.baseurl}}/business" id="mobile-business-link" class="hidden items-center gap-3 px-4 py-3 text-sm font-medium text-emerald-500 hover:text-emerald-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition duration-300 ease-out">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M4 4a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2H4zm3 3a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"/>
+                </svg>
+                <span>My Business</span>
               </a>
               <hr class="my-2 border-slate-200 dark:border-slate-700">
               <!-- Account / Sign In (Mobile): becomes the account name + Profile link when logged in -->
@@ -875,10 +824,10 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
               </svg>
             </div>
-            <span class="text-xl font-bold gradient-text">SD Auto</span>
+            <span class="text-xl font-bold gradient-text">Macro Cosmos</span>
           </div>
           <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
-            Smart navigation solutions for the City of San Diego. Making urban transportation efficient, safe, and accessible for everyone.
+            Smart navigation solutions for San Diego County. Making urban transportation efficient, safe, and accessible for everyone.
           </p>
         </div>
 
@@ -895,7 +844,7 @@
 
         <!-- Contact -->
         <div>
-          <h4 class="text-sm font-semibold text-slate-900 dark:text-slate-100 uppercase tracking-wider mb-4">City of San Diego</h4>
+          <h4 class="text-sm font-semibold text-slate-900 dark:text-slate-100 uppercase tracking-wider mb-4">San Diego County</h4>
           <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
             A smart city initiative designed to optimize urban mobility and support local communities.
           </p>
@@ -910,7 +859,7 @@
       <!-- Bottom Bar -->
       <div class="mt-12 pt-8 border-t border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row justify-between items-center gap-4">
         <p class="text-sm text-slate-500 dark:text-slate-400">
-          © 2025 SD Auto. Built by <span class="font-medium text-primary-600 dark:text-primary-400">Ahaan & Team</span>
+          © 2025 Macro Cosmos. Built by <span class="font-medium text-primary-600 dark:text-primary-400">Ahaan & Team</span>
         </p>
         <div class="flex items-center gap-2">
           <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-xs font-medium">
@@ -1172,6 +1121,55 @@
       color: #94a3b8;
     }
 
+    /* ===== Blog / markdown post typography =====
+       Tailwind's preflight reset strips default heading sizes and list bullets,
+       which made markdown blog/doc posts render as flat "lumps of text". This
+       restores proper typography, scoped to rendered markdown only
+       (.post-content), so it never affects the app's Tailwind-built feature
+       pages (route finder, business portal, admin, etc.). Complements the
+       existing .post-content img/table rules below rather than overriding them. */
+    .site-main .post-content { font-size: 1.05rem; line-height: 1.75; color: #334155; }
+    .dark .site-main .post-content { color: #cbd5e1; }
+    .site-main .post-content h1 { font-size: 2.1rem; line-height: 1.15; margin: 2rem 0 1rem; font-weight: 700; }
+    .site-main .post-content h2 { font-size: 1.6rem; line-height: 1.2; margin: 1.9rem 0 0.9rem; font-weight: 700; }
+    .site-main .post-content h3 { font-size: 1.3rem; line-height: 1.25; margin: 1.5rem 0 0.7rem; font-weight: 600; }
+    .site-main .post-content h4 { font-size: 1.12rem; margin: 1.3rem 0 0.6rem; font-weight: 600; }
+    .site-main .post-content h5,
+    .site-main .post-content h6 { font-size: 1rem; margin: 1.1rem 0 0.5rem; font-weight: 600; }
+    .site-main .post-content p { margin: 0 0 1.1rem; }
+    .site-main .post-content ul,
+    .site-main .post-content ol { margin: 0 0 1.1rem; padding-left: 1.6rem; }
+    .site-main .post-content ul { list-style: disc; }
+    .site-main .post-content ol { list-style: decimal; }
+    .site-main .post-content li { margin: 0.35rem 0; }
+    .site-main .post-content li > ul,
+    .site-main .post-content li > ol { margin: 0.3rem 0; }
+    .site-main .post-content a { color: #0d6efd; text-decoration: underline; text-underline-offset: 2px; }
+    .dark .site-main .post-content a { color: #60a5fa; }
+    .site-main .post-content strong,
+    .site-main .post-content b { font-weight: 700; }
+    .site-main .post-content em,
+    .site-main .post-content i { font-style: italic; }
+    .site-main .post-content blockquote {
+      margin: 1.2rem 0; padding: 0.5rem 1.1rem; border-left: 4px solid #93c5fd;
+      background: rgba(148, 163, 184, 0.08); border-radius: 0 0.5rem 0.5rem 0; color: #475569;
+    }
+    .dark .site-main .post-content blockquote { color: #94a3b8; border-left-color: #3b82f6; }
+    .site-main .post-content code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.9em;
+      background: rgba(148, 163, 184, 0.16); padding: 0.15em 0.4em; border-radius: 0.35rem;
+    }
+    .site-main .post-content pre {
+      background: #0f172a; color: #e2e8f0; padding: 1rem 1.2rem; border-radius: 0.75rem;
+      overflow-x: auto; margin: 0 0 1.2rem;
+    }
+    .site-main .post-content pre code { background: none; padding: 0; color: inherit; font-size: 0.875rem; }
+    .site-main .post-content img { max-width: 100%; height: auto; margin: 1rem 0; }
+    .site-main .post-content hr { border: 0; border-top: 1px solid rgba(148, 163, 184, 0.3); margin: 2rem 0; }
+    .site-main .post-content th,
+    .site-main .post-content td { border: 1px solid rgba(148, 163, 184, 0.3); padding: 0.5rem 0.75rem; text-align: left; }
+    .site-main .post-content th { background: rgba(148, 163, 184, 0.12); font-weight: 600; }
+
     .gradient-text {
       background: none;
       background-clip: border-box;
@@ -1288,7 +1286,8 @@
 
     .site-main #map,
     .site-main #hazardMap,
-    .site-main .leaflet-container {
+    .site-main .leaflet-container,
+    .site-main .maplibregl-map {
       border-radius: 1.75rem;
       border: 1px solid rgba(148, 163, 184, 0.22);
       box-shadow: 0 32px 56px -40px rgba(8, 26, 46, 0.34);
@@ -1297,7 +1296,8 @@
 
     .dark .site-main #map,
     .dark .site-main #hazardMap,
-    .dark .site-main .leaflet-container {
+    .dark .site-main .leaflet-container,
+    .dark .site-main .maplibregl-map {
       border-color: rgba(148, 163, 184, 0.14);
       box-shadow: 0 32px 56px -40px rgba(2, 6, 23, 0.72);
     }
