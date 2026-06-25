@@ -186,7 +186,7 @@
       same "printed page" as the copyright notice for easier
       identification within third-party archives.
 
-   Copyright [2026] [Ahaan Vaidyanathan, Arnav Mittal]
+   Copyright [2026] [Ahaan Vaidyanathan]
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -202,41 +202,3 @@
 
 ---
 
-   ADDITIONAL TERMS AND CONDITIONS
-
-   The following additional terms supplement the Apache License 2.0 above
-   and apply to all use of this Work:
-
-   A. OWNERSHIP
-
-      This Work is jointly and equally owned by Ahaan Vaidyanathan and
-      Arnav Mittal (collectively, the "Owners"). Each Owner holds an
-      equal, undivided 50% ownership interest in the Work, including all
-      intellectual property rights therein. Neither Owner may unilaterally
-      transfer, assign, or encumber their ownership interest without the
-      express written consent of the other Owner.
-
-   B. RESEARCH AND BUSINESS DOCUMENTS
-
-      Any research documents, business documents, proposals, reports,
-      analyses, presentations, or related materials associated with or
-      derived from this Work may not be used, reproduced, distributed,
-      published, or shared in any form without prior written permission
-      from both Owners.
-
-   C. OWNER DISCRETION
-
-      Notwithstanding the open-source nature of this Work, the Owners
-      reserve the final and absolute right to determine what uses,
-      distributions, modifications, or derivative works are permitted.
-      The Owners may, at their sole and joint discretion, revoke or
-      restrict permissions granted under this License on a case-by-case
-      basis by providing written notice. Any use that the Owners deem
-      contrary to the spirit or intent of this project may be prohibited
-      upon notice.
-
-   D. CONFLICT WITH APACHE LICENSE 2.0
-
-      In the event of any conflict between these Additional Terms and the
-      Apache License 2.0, these Additional Terms shall take precedence to
-      the maximum extent permitted by applicable law.
