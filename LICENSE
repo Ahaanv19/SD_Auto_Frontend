@@ -186,7 +186,7 @@
       same "printed page" as the copyright notice for easier
       identification within third-party archives.
 
-   Copyright [2026] [Ahaan Vaidyanathan]
+   Copyright [2026] Ahaan Vaidyanathan and Rudransh Guha
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -202,3 +202,61 @@
 
 ---
 
+ADDENDUM: JOINT OWNERSHIP AND RESTRICTED USE CLAUSE
+
+This Addendum supplements the Apache License 2.0 above and applies specifically
+to the project known as "Macro Cosmos" and all associated source code, assets,
+documentation, and Derivative Works contained in this repository.
+
+1. Joint and Equal Ownership.
+   This project is jointly and equally owned by Ahaan Vaidyanathan and
+   Rudransh Guha (collectively, the "Owners"). Each Owner holds an equal,
+   undivided 50% interest in all intellectual property rights associated
+   with this Work. No single Owner may unilaterally transfer, assign,
+   sublicense, or otherwise dispose of their ownership interest without the
+   prior written consent of the other Owner.
+
+2. Restrictions on Third-Party Use Without Permission.
+   Notwithstanding any permissions granted elsewhere in the Apache License 2.0,
+   no individual or entity other than the Owners is permitted to:
+
+   (a) Portfolio and Professional Representation: Display, reference, claim
+       credit for, or otherwise represent this Work — in whole or in part —
+       on resumes, CVs, portfolios, LinkedIn profiles, personal websites,
+       or any other professional or career-oriented medium, without the prior
+       written consent of BOTH Owners.
+
+   (b) Academic and Institutional Applications: Submit, reference, or present
+       this Work — in whole or in part — as part of any college application,
+       university application, scholarship application, grant application,
+       academic competition, or similar institutional process, without the
+       prior written consent of BOTH Owners.
+
+   (c) Forking: Create a fork of this repository on any platform (including
+       but not limited to GitHub) for any purpose other than private,
+       non-public personal study, without the prior written consent of
+       BOTH Owners.
+
+   (d) Templates and Derivatives: Use this repository or any portion of its
+       code, structure, design, or content as a template, starter project,
+       or basis for any other publicly distributed or publicly presented
+       work, without the prior written consent of BOTH Owners.
+
+3. Permission Process.
+   Any individual seeking permission for any of the activities described in
+   Section 2 above must obtain explicit written approval from BOTH
+   Ahaan Vaidyanathan AND Rudransh Guha prior to engaging in such activity.
+   Approval from only one Owner is insufficient and does not constitute
+   authorization.
+
+4. No Waiver.
+   Failure by either Owner to enforce any provision of this Addendum shall
+   not constitute a waiver of their right to enforce such provision at a
+   later time.
+
+5. Severability.
+   If any provision of this Addendum is found to be unenforceable under
+   applicable law, the remaining provisions shall continue in full force
+   and effect.
+
+---
