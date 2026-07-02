@@ -10,11 +10,11 @@ categories: [About/Ideation]
 
 
 <section class="max-w-5xl mx-auto px-6 py-12 post-content">
-  <h1>About Poway Auto</h1>
+  <h1>About Macro Cosmos</h1>
 
   <p>
-    <strong>Poway Auto</strong> is an intelligent, community-driven navigation platform created to enhance commuting experiences in Poway, California.
-    Whether you're headed to school, work, or anywhere in between, Poway Auto helps you travel smarter by combining real-time traffic data,
+    <strong>Macro Cosmos</strong> is an intelligent, community-driven navigation platform created to enhance commuting experiences in San Diego County, California.
+    Whether you're headed to school, work, or anywhere in between, Macro Cosmos helps you travel smarter by combining real-time traffic data,
     AI-powered route suggestions, and live community hazard reports.
   </p>
 
