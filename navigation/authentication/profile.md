@@ -37,6 +37,26 @@ search_exclude: true
         </p>
     </div>
 
+    <!-- Two-Factor Authentication via Passkeys — shown at the TOP so it's seen first -->
+    <section class="rounded-[2rem] border border-slate-200/70 bg-white/80 p-8 shadow-medium backdrop-blur-sm dark:border-slate-700/60 dark:bg-slate-900/70">
+        <h2 class="text-2xl font-semibold text-slate-900 dark:text-white">Two-Factor Authentication (Passkeys)</h2>
+        <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">Secure your account and sign in without a password using Face&nbsp;ID, Touch&nbsp;ID, Windows&nbsp;Hello, or a security key. A passkey is your second factor — no authenticator app or codes needed.</p>
+        <p id="passkey-required" class="hidden mt-4 text-sm font-semibold text-rose-600 dark:text-rose-400"></p>
+        <div id="passkey-list" class="mt-4 space-y-2"></div>
+        <button type="button" onclick="addPasskey()" class="mt-4 rounded-xl bg-slate-900 px-5 py-2.5 text-white font-semibold hover:bg-slate-800 dark:bg-primary-600 dark:hover:bg-primary-500">+ Add a passkey</button>
+        <p id="passkey-message" class="mt-3 min-h-5 text-sm font-medium"></p>
+
+        <!-- Recovery backup codes -->
+        <div class="mt-6 border-t border-slate-200 dark:border-slate-700 pt-5">
+            <h3 class="text-base font-semibold text-slate-800 dark:text-slate-200">Recovery backup codes</h3>
+            <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">One-time codes to sign in if you ever lose your passkey device. <span id="backup-remaining" class="font-medium"></span></p>
+            <div id="backup-codes-box" class="hidden mt-3 grid grid-cols-2 gap-2 rounded-xl bg-slate-900 p-4 font-mono text-sm text-slate-100"></div>
+            <p id="backup-save-warning" class="hidden mt-2 text-xs font-semibold text-amber-600 dark:text-amber-400">Save these now — they won't be shown again, and each works only once.</p>
+            <button type="button" onclick="generateBackupCodes()" class="mt-3 rounded-xl border border-slate-300 px-4 py-2 text-sm font-semibold hover:border-primary-500 dark:border-slate-600">Generate backup codes</button>
+            <p id="backup-message" class="mt-2 min-h-5 text-sm font-medium"></p>
+        </div>
+    </section>
+
     <div class="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
         <aside class="rounded-[2rem] border border-slate-200/70 bg-white/80 p-8 shadow-medium backdrop-blur-sm dark:border-slate-700/60 dark:bg-slate-900/70">
             <div class="space-y-6">
@@ -120,6 +140,126 @@ search_exclude: true
 import {pythonURI, fetchOptions } from '{{site.baseurl}}/assets/js/api/config.js';
 // Import functions from config.js
 import { putUpdate, postUpdate, deleteData, logoutUser } from "{{site.baseurl}}/assets/js/api/profile.js";
+import { startRegistration } from 'https://cdn.jsdelivr.net/npm/@simplewebauthn/browser@10.0.0/+esm';
+
+// ===== Passkeys (WebAuthn / biometric) =====
+async function loadPasskeys() {
+    const list = document.getElementById('passkey-list');
+    if (!list) return;
+    try {
+        const r = await fetch(`${pythonURI}/api/webauthn/credentials`, fetchOptions);
+        const items = r.ok ? await r.json() : [];
+        if (!items.length) { list.innerHTML = '<p class="text-sm text-slate-500">No passkeys yet.</p>'; return; }
+        list.innerHTML = items.map(p => `
+            <div class="flex items-center justify-between rounded-xl border border-slate-200 dark:border-slate-700 px-4 py-2">
+                <span class="text-sm text-slate-700 dark:text-slate-200">${(p.name || 'Passkey')} <span class="text-xs text-slate-400">· added ${(p.created_at || '').slice(0, 10)}</span></span>
+                <button type="button" onclick="removePasskey(${p.id})" class="text-xs font-semibold text-rose-500 hover:text-rose-600">Remove</button>
+            </div>`).join('');
+    } catch (e) { /* ignore */ }
+}
+window.addPasskey = async function () {
+    const msg = document.getElementById('passkey-message'); msg.textContent = '';
+    // WebAuthn forbids IP addresses (e.g. 127.0.0.1) as a relying-party domain.
+    if (/^\d{1,3}(\.\d{1,3}){3}$/.test(location.hostname)) {
+        msg.className = 'mt-3 text-sm font-medium text-rose-500';
+        msg.textContent = "Passkeys need 'localhost' or a real domain — open this site at http://localhost (not an IP address) to use passkeys.";
+        return;
+    }
+    try {
+        const beginR = await fetch(`${pythonURI}/api/webauthn/register/begin`, { ...fetchOptions, method: 'POST' });
+        const options = await beginR.json();
+        if (!beginR.ok) throw new Error(options.error || 'Could not start passkey setup');
+        const attestation = await startRegistration(options); // triggers the biometric/security-key prompt
+        const compR = await fetch(`${pythonURI}/api/webauthn/register/complete`, {
+            ...fetchOptions, method: 'POST', body: JSON.stringify({ credential: attestation, name: 'Passkey' })
+        });
+        const data = await compR.json();
+        if (!compR.ok) throw new Error(data.error || 'Passkey registration failed');
+        msg.className = 'mt-3 text-sm font-medium text-emerald-500'; msg.textContent = 'Passkey added! This is your 2FA. Tip: generate backup codes below so you never get locked out.';
+        loadPasskeys();
+        refreshMfaStatus();
+        refreshBackupStatus();
+        // If we were sent here for forced 2FA setup, continue into the app now.
+        if (new URLSearchParams(location.search).get('mfa') === 'required') {
+            msg.textContent = "Passkey added — you're all set! Taking you into the app…";
+            setTimeout(() => { window.location.href = "{{site.baseurl}}/"; }, 1400);
+        }
+    } catch (e) {
+        msg.className = 'mt-3 text-sm font-medium text-rose-500';
+        msg.textContent = (e && e.message) ? e.message : 'Passkey setup was cancelled.';
+    }
+};
+window.removePasskey = async function (id) {
+    if (!window.confirm('Remove this passkey?')) return;
+    try {
+        await fetch(`${pythonURI}/api/webauthn/credentials/${id}`, { ...fetchOptions, method: 'DELETE' });
+        loadPasskeys();
+        refreshMfaStatus();
+    } catch (e) { /* ignore */ }
+};
+
+// ===== Recovery backup codes =====
+async function refreshBackupStatus() {
+    const el = document.getElementById('backup-remaining');
+    if (!el) return;
+    try {
+        const r = await fetch(`${pythonURI}/api/mfa/backup-codes`, fetchOptions);
+        if (r.ok) {
+            const d = await r.json();
+            el.textContent = d.remaining > 0 ? `You have ${d.remaining} unused code(s).` : 'None generated yet.';
+        }
+    } catch (e) { /* ignore */ }
+}
+window.generateBackupCodes = async function () {
+    const msg = document.getElementById('backup-message'); msg.textContent = '';
+    if (!window.confirm('Generate new backup codes? This replaces any existing ones.')) return;
+    try {
+        const r = await fetch(`${pythonURI}/api/mfa/backup-codes`, { ...fetchOptions, method: 'POST' });
+        const d = await r.json();
+        if (!r.ok) throw new Error(d.error || 'Could not generate codes');
+        const box = document.getElementById('backup-codes-box');
+        box.innerHTML = d.codes.map(c => `<span>${c}</span>`).join('');
+        box.classList.remove('hidden');
+        document.getElementById('backup-save-warning').classList.remove('hidden');
+        refreshBackupStatus();
+    } catch (e) { msg.className = 'mt-2 text-sm font-medium text-rose-500'; msg.textContent = e.message; }
+};
+refreshBackupStatus();
+loadPasskeys();
+
+// ===== 2FA status (passkey-based) — drives the "2FA required" banner =====
+// 2FA is now satisfied by a passkey; there is no authenticator-app step.
+let mfaEnforced = false;  // true when this account must set up 2FA before leaving
+async function refreshMfaStatus() {
+    const banner = document.getElementById('passkey-required');
+    if (!banner) return;
+    try {
+        const r = await fetch(`${pythonURI}/api/mfa/status`, fetchOptions);
+        if (!r.ok) { banner.classList.add('hidden'); mfaEnforced = false; return; }
+        const s = await r.json();
+        mfaEnforced = !!s.required;
+        if (s.required) {
+            banner.textContent = '⚠️ Two-factor authentication is REQUIRED for your account — add a passkey below.';
+            banner.classList.remove('hidden');
+        } else {
+            banner.classList.add('hidden');
+        }
+    } catch (e) { /* ignore */ }
+}
+refreshMfaStatus();
+
+// Block navigation away from this page until 2FA is set up, with an alert.
+document.addEventListener('click', (e) => {
+    if (!mfaEnforced) return;
+    const a = e.target.closest('a[href]');
+    if (!a) return;
+    const href = a.getAttribute('href') || '';
+    // Allow staying on the profile page, anchor jumps, and logging out.
+    if (href.startsWith('#') || href.includes('/profile') || href.includes('/logout')) return;
+    e.preventDefault();
+    e.stopPropagation();
+    alert('You need to set up two-factor authentication first. Add a passkey on this page before continuing — it is required for your account.');
+}, true);
 
 // Function to update table with fetched data
 function updateTableWithData(data) {

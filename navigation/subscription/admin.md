@@ -510,14 +510,30 @@ menu: nav/home.html
               ${user.role === 'Admin' ? 'ADMIN' : (user.tier || 'FREE').toUpperCase()}
             </span>
           </div>
-          <button onclick="openUpgradeModal(${user.id}, '${user.username || user.name}', '${user.tier || 'free'}')" 
-            class="px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-lg text-white font-medium transition-colors">
-            Set Plan
-          </button>
+          <div class="flex gap-2 shrink-0">
+            <button onclick="openUpgradeModal(${user.id}, '${escapeHTML(user.username || user.name)}', '${user.tier || 'free'}')" 
+              class="px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-lg text-white font-medium transition-colors">
+              Set Plan
+            </button>
+            <button onclick="resetUser2fa('${escapeHTML(user.uid || user.username || '')}')"
+              class="px-4 py-2 bg-amber-600/80 hover:bg-amber-600 rounded-lg text-white font-medium transition-colors" title="Remove this user's passkeys & backup codes so they can re-enroll">
+              Reset 2FA
+            </button>
+          </div>
         </div>
       </div>
     `).join('');
   }
+
+  window.resetUser2fa = async function (uid) {
+    if (!uid) return;
+    if (!confirm(`Reset 2FA for "${uid}"? This removes their passkeys and backup codes so they can sign in with their password and set 2FA up again.`)) return;
+    try {
+      const r = await fetch(`${pythonURI}/api/mfa/admin/reset`, { ...fetchOptions, method: 'POST', body: JSON.stringify({ uid }) });
+      const d = await r.json();
+      alert(r.ok ? (d.message || '2FA reset.') : (d.error || 'Reset failed'));
+    } catch (e) { alert('Error resetting 2FA'); }
+  };
   
   // Search
   document.getElementById('user-search')?.addEventListener('input', (e) => {

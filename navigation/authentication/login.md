@@ -67,6 +67,21 @@ search_exclude: true
             Sign In
           </button>
         </form>
+
+        <div class="mt-5 flex items-center gap-3 text-xs text-slate-400">
+          <span class="h-px flex-1 bg-slate-200 dark:bg-slate-700"></span>OR<span class="h-px flex-1 bg-slate-200 dark:bg-slate-700"></span>
+        </div>
+        <button type="button" onclick="passkeyLogin()"
+          class="mt-4 w-full rounded-2xl border border-slate-200 px-4 py-3 text-sm font-semibold text-slate-700 transition hover:-translate-y-0.5 hover:border-primary-500 dark:border-slate-700 dark:text-slate-200">
+          🔑 Sign in with a passkey
+        </button>
+        <p id="passkey-login-message" class="mt-2 min-h-5 text-sm font-medium text-rose-600 dark:text-rose-400"></p>
+
+        <button type="button" onclick="document.getElementById('backupCode').classList.toggle('hidden')"
+          class="mt-3 text-xs text-slate-400 underline hover:text-primary-500">Lost your device? Use a backup code</button>
+        <input id="backupCode" autocomplete="one-time-code" placeholder="Backup code (XXXX-XXXX)"
+          class="hidden mt-2 w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-800 dark:border-slate-700 dark:bg-slate-950/60 dark:text-slate-100" />
+        <p class="mt-1 text-xs text-slate-400">Enter your password above and a backup code here, then click Sign In.</p>
       </section>
 
       <section class="rounded-[2rem] border border-slate-200/70 bg-white/85 p-8 shadow-medium backdrop-blur-sm dark:border-slate-700/60 dark:bg-slate-900/75">
@@ -113,6 +128,27 @@ search_exclude: true
 
 <script type="module">
   import { login, pythonURI, fetchOptions } from '{{site.baseurl}}/assets/js/api/config.js';
+  import { startAuthentication } from 'https://cdn.jsdelivr.net/npm/@simplewebauthn/browser@10.0.0/+esm';
+
+  // Passwordless / biometric sign-in via WebAuthn passkey.
+  window.passkeyLogin = async function() {
+    const uid = document.getElementById('uid').value.trim();
+    const msg = document.getElementById('passkey-login-message');
+    if (msg) msg.textContent = '';
+    if (!uid) { if (msg) msg.textContent = 'Enter your username first.'; return; }
+    try {
+      const beginR = await fetch(`${pythonURI}/api/webauthn/login/begin`, { ...fetchOptions, method: 'POST', body: JSON.stringify({ uid }) });
+      const options = await beginR.json();
+      if (!beginR.ok) throw new Error(options.error || 'No passkeys found for this account');
+      const assertion = await startAuthentication(options); // triggers the biometric prompt
+      const compR = await fetch(`${pythonURI}/api/webauthn/login/complete`, { ...fetchOptions, method: 'POST', body: JSON.stringify(assertion) });
+      const data = await compR.json();
+      if (!compR.ok) throw new Error(data.error || 'Passkey login failed');
+      window.location.href = '{{site.baseurl}}/profile';
+    } catch (e) {
+      if (msg) msg.textContent = (e && e.message) ? e.message : 'Passkey login was cancelled.';
+    }
+  };
 
   window.pythonLogin = function() {
     const options = {
@@ -126,6 +162,9 @@ search_exclude: true
         password: document.getElementById("password").value,
       }
     };
+    // Recovery: include a one-time backup code if the user entered one.
+    const bc = document.getElementById("backupCode");
+    if (bc && bc.value.trim()) options.body.backup_code = bc.value.trim();
     login(options);
   }
 
@@ -192,13 +231,17 @@ search_exclude: true
   }
 
   function pythonDatabase() {
-    fetch(`${pythonURI}/api/user`, fetchOptions)
+    // After login, check whether 2FA setup is required. If so, go straight into
+    // the forced-setup flow; otherwise into the app.
+    fetch(`${pythonURI}/api/mfa/status`, fetchOptions)
       .then(response => {
         if (!response.ok) throw new Error(`Flask server response: ${response.status}`);
         return response.json();
       })
-      .then(() => {
-        window.location.href = '{{site.baseurl}}/profile';
+      .then((s) => {
+        window.location.href = s && s.required
+          ? '{{site.baseurl}}/profile?mfa=required'
+          : '{{site.baseurl}}/profile';
       })
       .catch(error => {
         document.getElementById("message").textContent = `Login Error: ${error.message}`;

@@ -9,7 +9,7 @@ categories: [About/Ideation]
 ---
 
 
-<section class="max-w-5xl mx-auto px-6 py-12 prose prose-lg dark:prose-invert">
+<section class="max-w-5xl mx-auto px-6 py-12 post-content">
   <h1>About Poway Auto</h1>
 
   <p>

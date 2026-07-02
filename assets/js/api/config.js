@@ -75,42 +75,51 @@ export function describeHttpError(response) {
 }
 // User Login Function 
 export function login(options) {
-        // Modify the options to use the POST method and include the request body.
-        const requestOptions  = {
-                ...fetchOptions, // This will copy all properties from options
-                method: options.method, // Override the method property
-                cache: options.cache, // Set the cache property
-                body: JSON.stringify(options.body)
+        const msgEl = document.getElementById(options.message);
+        if (msgEl) msgEl.textContent = "";
+
+        const doFetch = (body) => fetch(options.URL, {
+                ...fetchOptions,
+                method: options.method,
+                cache: options.cache,
+                body: JSON.stringify(body),
+        });
+
+        const handle = (response) => {
+                if (response.ok) { options.callback(); return; }
+                return response.json().catch(() => ({})).then((data) => {
+                        // 2FA required and a passkey exists -> automatically start
+                        // the passkey (biometric) flow instead of making the user
+                        // click a separate button.
+                        if (response.status === 401 && data && data.use_passkey) {
+                                if (typeof window.passkeyLogin === 'function') {
+                                        if (msgEl) msgEl.textContent = 'Two-factor required — continue with your passkey…';
+                                        window.passkeyLogin();
+                                } else if (msgEl) {
+                                        msgEl.textContent = "This account requires two-factor sign-in — use “Sign in with a passkey” below.";
+                                }
+                                return;
+                        }
+                        // Two-factor enabled on this account: prompt for the TOTP code
+                        // and retry once. Accounts without MFA never reach this branch.
+                        if (response.status === 401 && data && data.mfa_required) {
+                                const code = window.prompt('Enter your 6-digit authentication code:');
+                                if (code && code.trim()) {
+                                        return doFetch({ ...options.body, otp: code.trim() }).then(handle);
+                                }
+                                if (msgEl) msgEl.textContent = 'Two-factor code required.';
+                                return;
+                        }
+                        let errorMsg;
+                        if (response.status === 401) errorMsg = 'Invalid username or password.';
+                        else errorMsg = describeHttpError(response) || ('Login error: ' + response.status);
+                        console.log('Login error: ' + response.status);
+                        if (msgEl) msgEl.textContent = errorMsg;
+                });
         };
 
-        // Clear the message area
-        document.getElementById(options.message).textContent = "";
-
-        // Fetch JWT
-        fetch(options.URL, requestOptions)
-        .then(response => {
-                // Trap error response from Web API
-                if (!response.ok) {
-                        // In the LOGIN context a 401 means bad credentials, not an
-                        // expired session — show a login-appropriate message. 429 is
-                        // login throttling; fall back to the shared messages otherwise.
-                        let errorMsg;
-                        if (response.status === 401) {
-                                errorMsg = 'Invalid username or password.';
-                        } else {
-                                errorMsg = describeHttpError(response) || ('Login error: ' + response.status);
-                        }
-                        console.log('Login error: ' + response.status);
-                        document.getElementById(options.message).textContent = errorMsg;
-                        return;
-                }
-                // Success!!!
-                // Redirect to the Database location
-                options.callback();
-        })
-        .catch(error => {
-                // Handle network errors
+        doFetch(options.body).then(handle).catch((error) => {
                 console.log('Possible CORS or Service Down error: ' + error);
-                document.getElementById(options.message).textContent = 'Possible CORS or service down error: ' + error;
+                if (msgEl) msgEl.textContent = 'Possible CORS or service down error: ' + error;
         });
 }

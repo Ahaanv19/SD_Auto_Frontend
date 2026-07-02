@@ -675,7 +675,23 @@
                 const currentUserResponse = await fetch(`${pythonURI}/api/user`, fetchOptions);
                 if (!currentUserResponse.ok) throw new Error('Failed to fetch current user');
                 const currentUser = await currentUserResponse.json();
-                
+
+                // Forced 2FA enrollment: a logged-in user who still needs to set up
+                // two-factor is redirected to the profile setup and blocked from the
+                // rest of the app until they enroll a passkey. Allowed pages while
+                // un-enrolled: profile (to set up), login, logout.
+                const _path = window.location.pathname;
+                const _onSetup = _path.includes('/profile') || _path.includes('/login') || _path.includes('/logout');
+                if (!_onSetup) {
+                  try {
+                    const _mfaResp = await fetch(`${pythonURI}/api/mfa/status`, fetchOptions);
+                    if (_mfaResp.ok && (await _mfaResp.json()).required) {
+                      window.location.href = "{{site.baseurl}}/profile?mfa=required";
+                      return;
+                    }
+                  } catch (e) { /* ignore; don't block on error */ }
+                }
+
                 // Update sign-in button with user name
                 button.innerHTML = '<svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg><span>' + (currentUser.name || "Profile") + '</span>';
                 button.href = "{{site.baseurl}}/profile";
