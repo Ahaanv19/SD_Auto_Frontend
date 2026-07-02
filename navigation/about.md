@@ -26,7 +26,7 @@ categories: [About/Ideation]
 
   <h2>Why Poway?</h2>
   <p>
-    Poway is a growing city with unique traffic patterns, school zones, and commuting demands. Existing apps often ignore small-town nuances — that's why we built
+    San Diego is a growing county with unique traffic patterns, school zones, and commuting demands. Existing apps often ignore small-town nuances — that's why we built
     a platform tailored to local data, user input, and real-world road conditions here in our hometown.
   </p>
 
